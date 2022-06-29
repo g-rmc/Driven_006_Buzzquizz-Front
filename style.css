@@ -52,9 +52,8 @@ body{
 }
 
 .paginaQuizz input{
-    width: 341px;
+    width: 90%;
     height: 46px;
-
 }
 
 #campo1, #campo2,#campo3,#campo4,#campo5{
@@ -112,4 +111,16 @@ body{
 
 .rodape div h1:hover{
     color: red;
+}
+
+@media(min-width:376px){
+    body{
+        width:100%;
+    }
+
+    .caixaPerguntas{
+        width:50%;
+        margin: 0 auto;
+    }
+
 }

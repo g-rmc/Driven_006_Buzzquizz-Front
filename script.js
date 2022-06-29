@@ -5,7 +5,7 @@ pag1.innerHTML += `<div class="topo"><h1>BuzzQuizz</h1></div>
                     <div class="enunciado"><h2>Comece pelo começo</h2></div>
                     <div class="caixaPerguntas">
                     <input id="campo1" class="c-titulo" placeholder="Titulo do seu quizz">
-                    <input id="campo2" placeholder="URL da imagem do seu quizz">
+                    <input id="campo1" placeholder="URL da imagem do seu quizz">
                     <input id="campo3" placeholder="Quantidade de perguntas do quizz">
                     <input id="campo4" placeholder="Quantidade de níveis do quizz">
                     </div>
@@ -70,7 +70,7 @@ function paginaPronto(){
 }
 
 
-paginaComeco();
-//paginaPerguntas();
+//paginaComeco();
+paginaPerguntas();
 //paginaNiveis();
 //paginaPronto();

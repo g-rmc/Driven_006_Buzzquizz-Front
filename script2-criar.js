@@ -5,22 +5,25 @@ var qtdeValue=undefined;
 var nivelValue=undefined;
 
 function paginaComeco(){
-pag1.innerHTML += ` <div class="topo"><h1>BuzzQuizz</h1></div>
-                    <div class="enunciado"><h2>Comece pelo começo</h2></div>
-                    <div class="caixaPerguntas">
-                        <input id="titulo" placeholder="Titulo do seu quizz">
-                        <input id="url" placeholder="URL da imagem do seu quizz">
-                        <input id="qtde" placeholder="Quantidade de perguntas do quizz">
-                        <input id="nivel" placeholder="Quantidade de níveis do quizz">
-                    </div>
-                    <div class="rodape">
-                        <button onclick="capturarInfosComeco(this)"><h1>Prosseguir para criar perguntas</h1></button>
-                    </div>`
+
+    pag1.innerHTML = "";
+
+    pag1.innerHTML += ` 
+                        <div class="enunciado"><h2>Comece pelo começo</h2></div>
+                        <div class="caixaPerguntas">
+                            <input id="titulo" placeholder="Titulo do seu quizz">
+                            <input id="url" placeholder="URL da imagem do seu quizz">
+                            <input id="qtde" placeholder="Quantidade de perguntas do quizz">
+                            <input id="nivel" placeholder="Quantidade de níveis do quizz">
+                        </div>
+                        <div class="rodape">
+                            <button onclick="capturarInfosComeco(this)"><h1>Prosseguir para criar perguntas</h1></button>
+                        </div>`;
 }
                
 function paginaPerguntas(){
     pag1.innerHTML="";
-    pag1.innerHTML += ` <div class="topo"><h1>BuzzQuizz</h1></div>
+    pag1.innerHTML += ` 
                         <div class="enunciado"><h2>Crie suas perguntas</h2></div>
                         <div class="caixaPerguntas">`;
 
@@ -52,7 +55,7 @@ function paginaPerguntas(){
 
 function paginaNiveis(){
     let pag3 = document.querySelector('.paginaQuizz');
-    pag3.innerHTML += ` <div class="topo"><h1>BuzzQuizz</h1></div>
+    pag3.innerHTML += ` 
                         <div class="enunciado"><h2>Agora,decida os níveis!</h2></div>
                         <div class="caixaPerguntas">
                             <h2>Nível 1</h2>
@@ -68,7 +71,7 @@ function paginaNiveis(){
 
 function paginaPronto(){
     let pag4 = document.querySelector('.paginaQuizz');
-    pag4.innerHTML += ` <div class="topo"><h1>BuzzQuizz</h1></div>
+    pag4.innerHTML += ` 
                         <div class="enunciado"><h2>Seu quiz esta pronto!</h2></div>
                         <div class="caixaPerguntas"></div>
                         <div class="rodape">
@@ -116,6 +119,6 @@ function validarURL(urlValue){
     return (false);
 }
 
-paginaComeco();
+//paginaComeco();
 //paginaNiveis();
 //paginaPronto();

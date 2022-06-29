@@ -49,6 +49,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    padding: 20px 0px 20px 0px;
 }
 
 .paginaQuizz input{

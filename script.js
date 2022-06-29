@@ -70,7 +70,7 @@ function paginaPronto(){
 }
 
 
-//paginaComeco();
-paginaPerguntas();
+paginaComeco();
+//paginaPerguntas();
 //paginaNiveis();
 //paginaPronto();

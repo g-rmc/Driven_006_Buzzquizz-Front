@@ -3,15 +3,16 @@ var tituloValue=undefined;
 var urlValue=undefined;
 var qtdeValue=undefined;
 var nivelValue=undefined;
+var contadorPerguntas=0;
 
 function paginaComeco(){
 pag1.innerHTML += `<div class="topo"><h1>BuzzQuizz</h1></div>
                     <div class="enunciado"><h2>Comece pelo começo</h2></div>
                     <div class="caixaPerguntas">
-                    <input id="titulo" placeholder="Titulo do seu quizz">
-                    <input id="url" placeholder="URL da imagem do seu quizz">
-                    <input id="qtde" placeholder="Quantidade de perguntas do quizz">
-                    <input id="nivel" placeholder="Quantidade de níveis do quizz">
+                    <input id="titulo" class="formatação" placeholder="Titulo do seu quizz">
+                    <input id="url" class="formatação" placeholder="URL da imagem do seu quizz">
+                    <input id="qtde" class="formatação"  placeholder="Quantidade de perguntas do quizz">
+                    <input id="nivel" class="formatação" placeholder="Quantidade de níveis do quizz">
                     </div>
                     <div class="rodape">
                     <button onclick="capturarInfosComeco(this)"><h1>Prosseguir para criar perguntas</h1></button>
@@ -22,27 +23,29 @@ function paginaPerguntas(){
     pag1.innerHTML="";
     pag1.innerHTML += `<div class="topo"><h1>BuzzQuizz</h1></div>
                         <div class="enunciado"><h2>Crie suas perguntas</h2></div>
-                        <div class="caixaPerguntas">`;
+                        <div class="caixaPerguntas"></div>`;
 
     for(let i=1; i<=qtdeValue;i++){
+        contadorPerguntas++;
         pag1.innerHTML += `
                         <h2>Pergunta ${i}</h2>
-                        <input id="campo1" placeholder="Texto da pergunta">
-                        <input id="campo2" placeholder="Cor de fundo da pergunta">
+                        <input id="txtPergunta" class="formatação" placeholder="Texto da pergunta">
+                        <input id="corPergunta" class="formatação" placeholder="Cor de fundo da pergunta">
                         <h2>Resposta Correta</h2>
-                        <input id="campo1" placeholder="Resposta correta">
-                        <input id="campo2" placeholder="URL da imagem">
+                        <input id="respostaPergunta" class="formatação" placeholder="Resposta correta">
+                        <input id="urlPergunta" class="formatação" placeholder="URL da imagem">
                        
                         <h2>Resposta Incorreta</h2>
-                        <input id="campo1" placeholder="Resposta incorreta 1">
-                        <input id="campo2" placeholder="URL da imagem 1">
+                        <input id="respostaPergunta1" class="formatação" placeholder="Resposta incorreta 1">
+                        <input id="urlPergunta1" class="formatação" placeholder="URL da imagem 1">
 
-                        <input id="campo1" placeholder="Resposta incorreta 2">
-                        <input id="campo2" placeholder="URL da imagem 2">
+                        <input id="respostaPergunta1" class="formatação" placeholder="Resposta incorreta 2">
+                        <input id="urlPergunta2" class="formatação" placeholder="URL da imagem 2">
 
-                        <input id="campo1" placeholder="Resposta incorreta 3">
-                        <input id="campo2" placeholder="URL da imagem 3">
-                        </div>`
+                        <input id="respostaPergunta1" class="formatação" placeholder="Resposta incorreta 3">
+                        <input id="urlPergunta3" class="formatação" placeholder="URL da imagem 3">
+                        
+                        `
             }
                   pag1.innerHTML +=     `<div class="rodape">
                     <button onclick="validarDados(this)"><h1>Prosseguir para criar níveis</h1></button>
@@ -78,7 +81,6 @@ function paginaPronto(){
 }
 
 function capturarInfosComeco(){
-    console.log("oi");
     tituloValue = document.getElementById("titulo").value;
     urlValue = document.getElementById("url").value;
     qtdeValue = document.getElementById("qtde").value;
@@ -108,12 +110,18 @@ function capturarInfosComeco(){
     paginaPerguntas();
 }}
 
+
 function validarURL(urlValue){
     var urlregex = new RegExp("^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
     if (urlregex.test(urlValue)) {
         return (true);
     }
     return (false);
+}
+
+function CapturarInfosPerguntas(){
+
+
 }
 
 paginaComeco();

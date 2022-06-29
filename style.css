@@ -67,6 +67,16 @@ body{
     margin-bottom: 10px;
 }
 
+.formatação{
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    color: #BABABA;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
 #campo5{
     height:180px;
     display:flex;

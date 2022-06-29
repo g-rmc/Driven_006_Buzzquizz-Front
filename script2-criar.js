@@ -120,10 +120,14 @@ function validarURL(urlValue){
 }
 
 function CapturarInfosPerguntas(){
+    txtValue= document.getElementById("txtPergunta").value;
+    corValue= document.getElementById("corPergunta").value;
 
-
+    respostaValue= document.getElementById("respostaPergunta").value;
+    urlValue= document.getElementById("urlPergunta").value;
 }
 
 paginaComeco();
 //paginaNiveis();
 //paginaPronto();
+

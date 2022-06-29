@@ -1,6 +1,12 @@
+* {
+    box-sizing: border-box;
+}
+
 body{
     width:375px;
+    background: #fcf9f9;
     margin: 0 auto;
+    font-family: 'Roboto';
 }
 
 .topo{
@@ -11,10 +17,12 @@ body{
     display:flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .topo h1{
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
     font-size: 37px;
@@ -22,8 +30,13 @@ body{
     color: #FFFFFF;
 }
 
+.topo h1:hover{
+    cursor: pointer;
+}
+
 .paginaQuizz{
-    background: #fcf9f9;
+    margin-top: 69px;
+    height: 100%;
 }
 
 .enunciado{
@@ -34,7 +47,6 @@ body{
 }
 
 .enunciado h2{
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -105,7 +117,6 @@ body{
 }
 
 .rodape h1{
-    font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -123,6 +134,86 @@ body{
 .rodape div h1:hover{
     color: red;
 }
+
+.meusQuizzes, .todosQuizzes{
+    width: 1050px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.meusQuizzes{
+    height: 180px;
+    border: 1px dashed #D5D5D5;
+    border-radius: 5px;
+    margin-top: 150px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.meusQuizzes h3{
+    font-size: 20px;
+    font-weight: 400;
+    color: #b9b9b9;
+    text-align: center;
+}
+
+.meusQuizzes button{
+    height: 40px;
+    width: 150px;
+    border: 1px dashed #EC362D;
+    border-radius: 50px;
+    background-color: #fcf9f9;
+    color:#EC362D;
+    font-size: 21px;
+    font-weight: 400;
+}
+
+.todosQuizzes{
+    margin-top: 80px;
+}
+
+.todosQuizzes h1{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.quizzes {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.quizz {
+    height: 180px;
+    width: 340px;
+    margin-top: 12px;
+    border-radius: 5px;
+    background-size: cover;    
+}
+
+.quizz div{
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 22px;
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 18px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+/* INICIO RESPONSIVO MOBILE */
 
 @media(min-width:376px){
     body{

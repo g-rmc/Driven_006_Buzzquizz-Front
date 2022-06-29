@@ -1,11 +1,13 @@
 let pag1 = document.querySelector('.paginaQuizz');
-var tituloValue=undefined;
-var urlValue=undefined;
-var qtdeValue=undefined;
-var nivelValue=undefined;
-var contadorPerguntas=0;
+let tituloValue=undefined;
+let urlValue=undefined;
+let qtdeValue=undefined;
+let nivelValue=undefined;
+let contadorPerguntas=0;
+let quizzObjeto={title:"",image:"",questions:{title:"", color:"", answers: {text:"", image:"", isCorrectAnswer:""}}, levels:[]};
 
 function paginaComeco(){
+    pag1.innerHTML = "";
 pag1.innerHTML += `<div class="topo"><h1>BuzzQuizz</h1></div>
                     <div class="enunciado"><h2>Comece pelo começo</h2></div>
                     <div class="caixaPerguntas">
@@ -29,21 +31,21 @@ function paginaPerguntas(){
         contadorPerguntas++;
         pag1.innerHTML += `
                         <h2>Pergunta ${i}</h2>
-                        <input id="txtPergunta" class="formatação" placeholder="Texto da pergunta">
-                        <input id="corPergunta" class="formatação" placeholder="Cor de fundo da pergunta">
+                        <input id="txtPergunta${i}" class="formatação" placeholder="Texto da pergunta">
+                        <input id="corPergunta${i}" class="formatação" placeholder="Cor de fundo da pergunta">
                         <h2>Resposta Correta</h2>
-                        <input id="respostaPergunta" class="formatação" placeholder="Resposta correta">
-                        <input id="urlPergunta" class="formatação" placeholder="URL da imagem">
+                        <input id="respostaPergunta${i}" class="formatação" placeholder="Resposta correta">
+                        <input id="urlPergunta${i}" class="formatação" placeholder="URL da imagem">
                        
                         <h2>Resposta Incorreta</h2>
-                        <input id="respostaPergunta1" class="formatação" placeholder="Resposta incorreta 1">
-                        <input id="urlPergunta1" class="formatação" placeholder="URL da imagem 1">
+                        <input id="respostaPergunta1${i}" class="formatação" placeholder="Resposta incorreta 1">
+                        <input id="urlPergunta1${i}" class="formatação" placeholder="URL da imagem 1">
 
-                        <input id="respostaPergunta1" class="formatação" placeholder="Resposta incorreta 2">
-                        <input id="urlPergunta2" class="formatação" placeholder="URL da imagem 2">
+                        <input id="respostaPergunta2${i}" class="formatação" placeholder="Resposta incorreta 2">
+                        <input id="urlPergunta2${i}" class="formatação" placeholder="URL da imagem 2">
 
-                        <input id="respostaPergunta1" class="formatação" placeholder="Resposta incorreta 3">
-                        <input id="urlPergunta3" class="formatação" placeholder="URL da imagem 3">
+                        <input id="respostaPergunta3${i}" class="formatação" placeholder="Resposta incorreta 3">
+                        <input id="urlPergunta3${i}" class="formatação" placeholder="URL da imagem 3">
                         
                         `
             }
@@ -112,7 +114,7 @@ function capturarInfosComeco(){
 
 
 function validarURL(urlValue){
-    var urlregex = new RegExp("^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
+    let urlregex = new RegExp("^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
     if (urlregex.test(urlValue)) {
         return (true);
     }
@@ -123,11 +125,25 @@ function CapturarInfosPerguntas(){
     txtValue= document.getElementById("txtPergunta").value;
     corValue= document.getElementById("corPergunta").value;
 
-    respostaValue= document.getElementById("respostaPergunta").value;
-    urlValue= document.getElementById("urlPergunta").value;
+    for(i=1;i<contadorPerguntas;i++){
+        respostaValue= document.getElementById("respostaPergunta"`${i}`).value;
+        urlValue= document.getElementById("urlPergunta").value;
+    }
+
+/*function enviarObjeto(){
+
+    quizzObjeto={
+        title: tituloValue,
+        image: urlValue,
+        questions:[
+            {
+             title:
+            }
+
+        ]
+
+    }
+
+}*/
+
 }
-
-paginaComeco();
-//paginaNiveis();
-//paginaPronto();
-

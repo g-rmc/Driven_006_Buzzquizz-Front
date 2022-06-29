@@ -209,7 +209,7 @@ body{
     padding: 18px;
 }
 
-button:hover {
+button:hover, .quizz:hover {
     cursor: pointer;
 }
 

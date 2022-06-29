@@ -4,16 +4,16 @@ let pag1 = document.querySelector('.paginaQuizz');
 pag1.innerHTML += `<div class="topo"><h1>BuzzQuizz</h1></div>
                     <div class="enunciado"><h2>Comece pelo começo</h2></div>
                     <div class="caixaPerguntas">
-                    <input id="campo1" class="c-titulo" placeholder="Titulo do seu quizz">
-                    <input id="campo1" placeholder="URL da imagem do seu quizz">
-                    <input id="campo3" placeholder="Quantidade de perguntas do quizz">
-                    <input id="campo4" placeholder="Quantidade de níveis do quizz">
+                    <input id="titulo" placeholder="Titulo do seu quizz">
+                    <input id="url" placeholder="URL da imagem do seu quizz">
+                    <input id="qtde" placeholder="Quantidade de perguntas do quizz">
+                    <input id="nivel" placeholder="Quantidade de níveis do quizz">
                     </div>
                     <div class="rodape">
-                    <button onclick="validarDados(this)"><h1>Prosseguir para criar perguntas</h1></button>
+                    <button onclick="capturarInfosComeco(this)"><h1>Prosseguir para criar perguntas</h1></button>
                     </div>`
 }
-
+               
 function paginaPerguntas(){
     let pag2 = document.querySelector('.paginaQuizz');
     pag2.innerHTML += `<div class="topo"><h1>BuzzQuizz</h1></div>
@@ -69,6 +69,42 @@ function paginaPronto(){
                     </div>`
 }
 
+function capturarInfosComeco(){
+    let tituloValue = document.getElementById("titulo").value;
+    let urlValue = document.getElementById("url").value;
+    let qtdeValue = document.getElementById("qtde").value;
+    let nivelValue = document.getElementById("nivel").value;
+  
+
+
+    if(tituloValue.length<20 || tituloValue>65){
+        alert("Titulo deve ter entre 20 e 65 caracteres");
+        paginaComeco();
+    }
+
+    else if(qtdeValue<3){
+        alert("Quantidade mínima de perguntas é 3");
+        paginaComeco();
+    }
+
+    else if(nivelValue<2){
+        alert("Quantidade mínima de níveis é 2");
+        paginaComeco();
+    }
+
+    else if(validarURL(urlValue)===false){
+        alert("Insira uma URL valida");
+        paginaComeco();
+    }
+}
+
+function validarURL(urlValue){
+    var urlregex = new RegExp("^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
+    if (urlregex.test(urlValue)) {
+        return (true);
+    }
+    return (false);
+}
 
 paginaComeco();
 //paginaPerguntas();

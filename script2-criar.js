@@ -16,24 +16,21 @@ let quizzObjeto={
 }
 
 let questions=[{
-    title:"", 
-    color:"", 
-    questions:[
-        {
+    
             title:"",
             color:"",
-            answers:[
-                {
-                    text:"",
-                    image:"",
-                    isCorrectAnswer:""
-                }
-            ]
+            answers:[]
+
         }
     ]
-}]
 
-
+let answers=[
+    {
+        text:"",
+        image:"",
+        isCorrectAnswer:""
+    }
+]
 
 function paginaComeco(){
     pag1.innerHTML = "";
@@ -166,31 +163,31 @@ function CapturarInfosPerguntas(){
         corValue= document.getElementById(`corPergunta${i}`).value;
         questions.color=corValue;  
 
-        for(j=1;j<=3;j++){
-            corretaValue = document.getElementById(`respostaPergunta${j}`).value;
-            questions.answers.text=corretaValue;  
-            corretaUrlValue= document.getElementById(`urlPergunta${j}`).value;
-            questions.answers.image=corretaUrlValue;
-            questions.answers.isCorrectAnswer="true";
+        corretaValue = document.getElementById(`respostaPergunta${i}`).value;
+        answers.text=corretaValue;  
+        console.log(answers.text);
+        corretaUrlValue= document.getElementById(`urlPergunta${i}`).value;
+        answers.image=corretaUrlValue;
+        answers.isCorrectAnswer="true";
+    
+        incorretaValue = document.getElementById(`respostaPergunta1${i}`).value;
+        answers.text=incorretaValue;  
+        incorretaUrlValue= document.getElementById(`urlPergunta1${i}`).value;
+        answers.image=incorretaUrlValue;
+        answers.isCorrectAnswer="false";
 
-            incorretaValue = document.getElementById(`respostaPergunta1${j}`).value;
-            questions.answers.text=incorretaValue;  
-            incorretaUrlValue= document.getElementById(`urlPergunta1${j}`).value;
-            questions.answers.image=incorretaUrlValue;
-            questions.answers.isCorrectAnswer="false";
+        incorretaValue = document.getElementById(`respostaPergunta2${i}`).value;
+        answers.text=incorretaValue;  
+        incorretaUrlValue= document.getElementById(`urlPergunta2${i}`).value;
+        answers.image=incorretaUrlValue;
+        answers.isCorrectAnswer="false";
 
-            incorretaValue = document.getElementById(`respostaPergunta2${j}`).value;
-            questions.answers.text=incorretaValue;  
-            incorretaUrlValue= document.getElementById(`urlPergunta2${j}`).value;
-            questions.answers.image=incorretaUrlValue;
-            questions.answers.isCorrectAnswer="false";
-
-            incorretaValue = document.getElementById(`respostaPergunta3${j}`).value;
-            questions.answers.text=incorretaValue;  
-            incorretaUrlValue= document.getElementById(`urlPergunta3${j}`).value;
-            questions.answers.image=incorretaUrlValue;
-            questions.answers.isCorrectAnswer="false";           
-            }
+        incorretaValue = document.getElementById(`respostaPergunta3${i}`).value;
+        answers.text=incorretaValue;  
+        incorretaUrlValue= document.getElementById(`urlPergunta3${i}`).value;
+        answers.image=incorretaUrlValue;
+        answers.isCorrectAnswer="false";      
+        console.log(answers);     
 
     }
     enviarObjeto();

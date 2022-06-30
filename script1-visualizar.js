@@ -19,7 +19,7 @@ function carregarPaginaInicial(){
                                     <div class="quizzes"></div>
                                 </div>`
 
-    //carregarQuizzes();
+    carregarQuizzes();
 }
 
 function carregarQuizzes(){

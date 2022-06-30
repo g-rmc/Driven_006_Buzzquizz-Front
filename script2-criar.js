@@ -3,10 +3,36 @@ let tituloValue=undefined;
 let urlValue=undefined;
 let qtdeValue=undefined;
 let nivelValue=undefined;
+let txtValue=undefined;
+let corValue=undefined;
+let corretaValue=undefined;
+let corretaUrlValue=undefined;
+let incorretaValue=undefined;
 let contadorPerguntas=0;
 
-let quizzObjeto={title:"",image:"",questions:{title:"", color:"", answers: {text:"", image:"", isCorrectAnswer:""}}, levels:[]};
-let questionsObjeto={title:"", color:"", answers: {text:"", image:"", isCorrectAnswer:""}};
+let quizzObjeto={
+    title:"",
+    image:"",
+}
+
+let questions=[{
+    title:"", 
+    color:"", 
+    questions:[
+        {
+            title:"",
+            color:"",
+            answers:[
+                {
+                    text:"",
+                    image:"",
+                    isCorrectAnswer:""
+                }
+            ]
+        }
+    ]
+}]
+
 
 
 function paginaComeco(){
@@ -49,7 +75,6 @@ function paginaPerguntas(){
 
                         <input id="respostaPergunta3${i}" class="formatação" placeholder="Resposta incorreta 3">
                         <input id="urlPergunta3${i}" class="formatação" placeholder="URL da imagem 3">
-                        
                         `
             }
                   pag1.innerHTML += ` <div class="rodape">
@@ -116,8 +141,10 @@ function validarInfosComeco(){
         paginaComeco();
     }
     else{
+        console.log(quizzObjeto.title);
+        console.log(quizzObjeto.image);
     paginaPerguntas();
-}
+    }
 }
 
 
@@ -130,37 +157,46 @@ function validarURL(urlValue){
 }
 
 function CapturarInfosPerguntas(){
-    for(i=1;i<contadorPerguntas;i++){
-    txtValue= document.getElementById("txtPergunta").value;
-    questionsObjeto.title=txtValue;    
-    corValue= document.getElementById("corPergunta").value;
-    questionsObjeto.color=corValue;  
-    respostaValue= document.getElementById("respostaPergunta").value;
-    questionsObjeto.answers.text=respostaValue;
-    urlValue= document.getElementById("urlPergunta").value;
-    questionsObjeto.answers.image=urlValue;
-    questionsObjeto.answers.isCorrectAnswer=true;
-    espostaValue= document.getElementById("respostaPergunta").value;
-    questionsObjeto.answers.text=respostaValue;
-    urlValue= document.getElementById("urlPergunta").value;
-    questionsObjeto.answers.image=urlValue;
-    questionsObjeto.answers.isCorrectAnswer=true;
-    espostaValue= document.getElementById("respostaPergunta").value;
-    questionsObjeto.answers.text=respostaValue;
-    urlValue= document.getElementById("urlPergunta").value;
-    questionsObjeto.answers.image=urlValue;
-    questionsObjeto.answers.isCorrectAnswer=true;
-    espostaValue= document.getElementById("respostaPergunta").value;
-    questionsObjeto.answers.text=respostaValue;
-    urlValue= document.getElementById("urlPergunta").value;
-    questionsObjeto.answers.image=urlValue;
-    questionsObjeto.answers.isCorrectAnswer=true;
-    questionsobjeto[i].push
+
+    for(i=1;i<=contadorPerguntas;i++){
+        txtValue= document.getElementById(`txtPergunta${i}`).value;
+        questions.title=txtValue; 
+        console.log(questions.title);
+
+        corValue= document.getElementById(`corPergunta${i}`).value;
+        questions.color=corValue;  
+
+        for(j=1;j<=3;j++){
+            corretaValue = document.getElementById(`respostaPergunta${j}`).value;
+            questions.answers.text=corretaValue;  
+            corretaUrlValue= document.getElementById(`urlPergunta${j}`).value;
+            questions.answers.image=corretaUrlValue;
+            questions.answers.isCorrectAnswer="true";
+
+            incorretaValue = document.getElementById(`respostaPergunta1${j}`).value;
+            questions.answers.text=incorretaValue;  
+            incorretaUrlValue= document.getElementById(`urlPergunta1${j}`).value;
+            questions.answers.image=incorretaUrlValue;
+            questions.answers.isCorrectAnswer="false";
+
+            incorretaValue = document.getElementById(`respostaPergunta2${j}`).value;
+            questions.answers.text=incorretaValue;  
+            incorretaUrlValue= document.getElementById(`urlPergunta2${j}`).value;
+            questions.answers.image=incorretaUrlValue;
+            questions.answers.isCorrectAnswer="false";
+
+            incorretaValue = document.getElementById(`respostaPergunta3${j}`).value;
+            questions.answers.text=incorretaValue;  
+            incorretaUrlValue= document.getElementById(`urlPergunta3${j}`).value;
+            questions.answers.image=incorretaUrlValue;
+            questions.answers.isCorrectAnswer="false";           
+            }
 
     }
+    enviarObjeto();
 }
 function enviarObjeto(){
+    
 
-    console.log(quizzObjeto);
-
+   
 }

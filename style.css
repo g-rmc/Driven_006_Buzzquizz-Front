@@ -1,9 +1,12 @@
 * {
     box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 body{
-    width:375px;
+    width:100%;
     background: #fcf9f9;
     margin: 0 auto;
     font-family: 'Roboto';
@@ -55,13 +58,14 @@ body{
 }
 
 .caixaPerguntas{
-    width:100%;
+    width:600px;
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     padding: 20px 0px 20px 0px;
+    margin: 0 auto;
 }
 
 .paginaQuizz input{
@@ -124,6 +128,8 @@ body{
 .rodape div h1:hover{
     color: red;
 }
+
+/* TELA INICIAL */
 
 .meusQuizzes, .todosQuizzes{
     width: 1050px;
@@ -203,16 +209,99 @@ button:hover, .quizz:hover {
     cursor: pointer;
 }
 
+/* TELA DE QUIZZ */
+
+.banner {
+    width: 100%;
+    height: 230px;
+    background-color: grey;
+}
+
+.banner div {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.banner h1 {
+    max-width: 760px;
+    color: #FFFFFF;
+    font-size: 39px;
+    font-weight: 400;
+    line-height: 45px;
+}
+
+.pergunta {
+    margin: 40px auto;
+    width: 760px;
+    padding: 30px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.titulo-pergunta {
+    width: 100%;
+    height: 135px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+    
+}
+
+.resposta-pergunta {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    height: 100%;
+    margin-top: 20px;
+}
+
+.resposta-pergunta img {
+    width: 330px;
+    height: 175px;
+    object-fit: cover;
+}
+
+.resposta-pergunta h2 {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 23px;
+    margin-top: 5px;
+}
+
 /* INICIO RESPONSIVO MOBILE */
 
-@media(min-width:376px){
+@media(max-width:1100px){
+
     body{
-        width:100%;
+        width: 375px;
     }
 
-    .caixaPerguntas{
-        width:50%;
-        margin: 0 auto;
+    .caixaPerguntas, .meusQuizzes, .todosQuizzes {
+        width: 340px;
+    }
+
+    .meusQuizzes{
+        margin-top: 100px;
+    }
+
+    .todosQuizzes{
+        margin-top: 30px;
     }
 
 }

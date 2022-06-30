@@ -4,20 +4,12 @@ let urlValue=undefined;
 let qtdeValue=undefined;
 let nivelValue=undefined;
 let contadorPerguntas=0;
-<<<<<<< HEAD
-let quizzObjeto={title:"",image:"",questions:{title:"", color:"", answers: {text:"", image:"", isCorrectAnswer:""}}, levels:[]};
-
-function paginaComeco(){
-    pag1.innerHTML = "";
-pag1.innerHTML += `<div class="topo"><h1>BuzzQuizz</h1></div>
-=======
 
 function paginaComeco(){
 
 pag1.innerHTML = "";
 
 pag1.innerHTML += `
->>>>>>> 0a241ae000e071dd1a8bf237f363648e6c4da3e6
                     <div class="enunciado"><h2>Comece pelo começo</h2></div>
                     <div class="caixaPerguntas">
                         <input id="titulo" class="formatação" placeholder="Titulo do seu quizz">
@@ -138,27 +130,8 @@ function CapturarInfosPerguntas(){
         respostaValue= document.getElementById("respostaPergunta"`${i}`).value;
         urlValue= document.getElementById("urlPergunta").value;
     }
+}
 
-<<<<<<< HEAD
-/*function enviarObjeto(){
-=======
 //paginaComeco();
 //paginaNiveis();
 //paginaPronto();
->>>>>>> 0a241ae000e071dd1a8bf237f363648e6c4da3e6
-
-    quizzObjeto={
-        title: tituloValue,
-        image: urlValue,
-        questions:[
-            {
-             title:
-            }
-
-        ]
-
-    }
-
-}*/
-
-}

@@ -9,15 +9,15 @@ function carregarPaginaInicial(){
 
     paginaBase.innerHTML = "";
 
-    paginaBase.innerHTML = `  <div class="meusQuizzes">
-                        <h3>Você não criou nenhum</br>quizz ainda :(</h3> 
-                        <button onclick="paginaComeco()">Criar Quizz</button>
-                    </div>
+    paginaBase.innerHTML = `    <div class="meusQuizzes">
+                                    <h3>Você não criou nenhum</br>quizz ainda :(</h3> 
+                                    <button onclick="paginaComeco()">Criar Quizz</button>
+                                </div>
 
-                    <div class="todosQuizzes">
-                        <h1>Todos os Quizzes</h1>
-                        <div class="quizzes"></div>
-                    </div>`
+                                <div class="todosQuizzes">
+                                    <h1>Todos os Quizzes</h1>
+                                    <div class="quizzes"></div>
+                                </div>`
 
     carregarQuizzes();
 }
@@ -35,8 +35,6 @@ function renderizarQuizzes(obj){
     let divQuizzes = document.querySelector(".quizzes");
 
     divQuizzes.innerHTML = ""
-
-    console.log(array[1])
 
     for (let i = 0; i < numQuizzes; i++){
         
@@ -70,10 +68,45 @@ function renderizarQuizz(obj){
 
     paginaBase.innerHTML = "";
 
-    paginaBase.innerHTML = `<div class="todosQuizzes">${quizz.title}</div>`;
+    paginaBase.innerHTML = `    <div class="banner" style="background-image: url('${quizz.image}');"> 
+                                    <div>
+                                        <h1>${quizz.title}</h1>
+                                    </div>
+                                </div>`;
 
-    console.log(quizz)
+    let perguntas = quizz.questions;
+    
+    for (let i = 0; i < perguntas.length; i++){
 
+        let pergunta = perguntas[i]
+
+        paginaBase.innerHTML += `   <div class="pergunta">
+                                        <div class="titulo-pergunta" style="background-color: ${pergunta.color};">${pergunta.title}</div>
+                                        <div class="resposta-pergunta" data-id="${i}"></div>
+                                    </div>`;
+      
+        let divRespostas = document.querySelector(`[data-id="${i}"]`);
+        let respostas = pergunta.answers;
+
+        respostas.sort(comparador);
+
+        for (let i = 0; i < respostas.length; i++){
+
+            let resposta = respostas[i];
+
+            divRespostas.innerHTML += ` <div class="resposta-${resposta.isCorrectAnswer}">
+                                            <img src="${resposta.image}">
+                                            <h2>${resposta.tilte}</h2>
+                                        </div>`
+        }
+
+
+    }
+
+}
+
+function comparador() { 
+	return Math.random() - 0.5; 
 }
 
 carregarPaginaInicial();

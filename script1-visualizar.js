@@ -19,14 +19,14 @@ function carregarPaginaInicial(){
                         <div class="quizzes"></div>
                     </div>`
 
-    carregarQuizzes();
+    //carregarQuizzes();
 }
 
-function carregarQuizzes(){
+/*function carregarQuizzes(){
     let promise = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
     promise.then(renderizarQuizzes);
     promise.catch(alertaErro);
-}
+}*/
 
 function renderizarQuizzes(obj){
     let array = obj.data;
@@ -58,11 +58,11 @@ function alertaErro(obj){
     alert(`Erro ${id}`);
 }
 
-function carregarQuizz(id){
+/*function carregarQuizz(id){
     let promise = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`);
     promise.then(renderizarQuizz);
     promise.catch(alertaErro);
-}
+}*/
 
 function renderizarQuizz(obj){
 

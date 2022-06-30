@@ -4,20 +4,14 @@ let urlValue=undefined;
 let qtdeValue=undefined;
 let nivelValue=undefined;
 let contadorPerguntas=0;
-<<<<<<< HEAD
+
 let quizzObjeto={title:"",image:"",questions:{title:"", color:"", answers: {text:"", image:"", isCorrectAnswer:""}}, levels:[]};
+let questionsObjeto={title:"", color:"", answers: {text:"", image:"", isCorrectAnswer:""}};
+
 
 function paginaComeco(){
     pag1.innerHTML = "";
-pag1.innerHTML += `<div class="topo"><h1>BuzzQuizz</h1></div>
-=======
-
-function paginaComeco(){
-
-pag1.innerHTML = "";
-
-pag1.innerHTML += `
->>>>>>> 0a241ae000e071dd1a8bf237f363648e6c4da3e6
+    pag1.innerHTML += `<div class="topo"><h1>BuzzQuizz</h1></div>
                     <div class="enunciado"><h2>Comece pelo começo</h2></div>
                     <div class="caixaPerguntas">
                         <input id="titulo" class="formatação" placeholder="Titulo do seu quizz">
@@ -58,9 +52,9 @@ function paginaPerguntas(){
                         
                         `
             }
-                  pag1.innerHTML += `   <div class="rodape">
-                                            <button onclick="validarDados(this)"><h1>Prosseguir para criar níveis</h1></button>
-                                        </div>`
+                  pag1.innerHTML += ` <div class="rodape">
+                                      <button onclick="CapturarInfosPerguntas(this)"><h1>Prosseguir para criar níveis</h1></button>
+ </div>`
 }
 
 function paginaNiveis(){
@@ -93,10 +87,15 @@ function paginaPronto(){
 
 function capturarInfosComeco(){
     tituloValue = document.getElementById("titulo").value;
+    quizzObjeto.title=tituloValue;
     urlValue = document.getElementById("url").value;
+    quizzObjeto.image=urlValue;
     qtdeValue = document.getElementById("qtde").value;
     nivelValue = document.getElementById("nivel").value;
-  
+    validarInfosComeco();
+}
+
+function validarInfosComeco(){
     if(tituloValue.length<20 || tituloValue>65){
         alert("Titulo deve ter entre 20 e 65 caracteres");
         paginaComeco();
@@ -117,9 +116,9 @@ function capturarInfosComeco(){
         paginaComeco();
     }
     else{
-        console.log("oi");
     paginaPerguntas();
-}}
+}
+}
 
 
 function validarURL(urlValue){
@@ -131,34 +130,37 @@ function validarURL(urlValue){
 }
 
 function CapturarInfosPerguntas(){
-    txtValue= document.getElementById("txtPergunta").value;
-    corValue= document.getElementById("corPergunta").value;
-
     for(i=1;i<contadorPerguntas;i++){
-        respostaValue= document.getElementById("respostaPergunta"`${i}`).value;
-        urlValue= document.getElementById("urlPergunta").value;
+    txtValue= document.getElementById("txtPergunta").value;
+    questionsObjeto.title=txtValue;    
+    corValue= document.getElementById("corPergunta").value;
+    questionsObjeto.color=corValue;  
+    respostaValue= document.getElementById("respostaPergunta").value;
+    questionsObjeto.answers.text=respostaValue;
+    urlValue= document.getElementById("urlPergunta").value;
+    questionsObjeto.answers.image=urlValue;
+    questionsObjeto.answers.isCorrectAnswer=true;
+    espostaValue= document.getElementById("respostaPergunta").value;
+    questionsObjeto.answers.text=respostaValue;
+    urlValue= document.getElementById("urlPergunta").value;
+    questionsObjeto.answers.image=urlValue;
+    questionsObjeto.answers.isCorrectAnswer=true;
+    espostaValue= document.getElementById("respostaPergunta").value;
+    questionsObjeto.answers.text=respostaValue;
+    urlValue= document.getElementById("urlPergunta").value;
+    questionsObjeto.answers.image=urlValue;
+    questionsObjeto.answers.isCorrectAnswer=true;
+    espostaValue= document.getElementById("respostaPergunta").value;
+    questionsObjeto.answers.text=respostaValue;
+    urlValue= document.getElementById("urlPergunta").value;
+    questionsObjeto.answers.image=urlValue;
+    questionsObjeto.answers.isCorrectAnswer=true;
+    questionsobjeto[i].push
+
     }
+}
+function enviarObjeto(){
 
-<<<<<<< HEAD
-/*function enviarObjeto(){
-=======
-//paginaComeco();
-//paginaNiveis();
-//paginaPronto();
->>>>>>> 0a241ae000e071dd1a8bf237f363648e6c4da3e6
-
-    quizzObjeto={
-        title: tituloValue,
-        image: urlValue,
-        questions:[
-            {
-             title:
-            }
-
-        ]
-
-    }
-
-}*/
+    console.log(quizzObjeto);
 
 }

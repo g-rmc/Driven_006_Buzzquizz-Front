@@ -230,7 +230,7 @@ function renderizarResultado(obj){
 
     paginaBase.innerHTML += divResultado;
 
-    let botoes = `  <button class="reiniciarQuizz" onclick="carregarQuizz(${idQuizz})">Reiniciar Quizz</button>
+    let botoes = `  <button class="reiniciarQuizz" onclick="carregarQuizz(${idQuizz})">Reiniciar o Quizz</button>
                     <button class="reiniciarPagina" onclick="atualizarPagina()">Voltar pra home</button>`
 
     paginaBase.innerHTML += botoes;

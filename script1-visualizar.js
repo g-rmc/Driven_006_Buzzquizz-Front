@@ -112,6 +112,8 @@ function carregarQuizz(id){
 function renderizarQuizz(obj){
 
     window.scrollTo(0, 0);
+    respostasDadas = 0;
+    respostasCorretas = 0;
 
     quizzObj = obj;
 
@@ -230,8 +232,10 @@ function renderizarResultado(obj){
 
     paginaBase.innerHTML += divResultado;
 
-    let botoes = `  <button class="reiniciarQuizz" onclick="carregarQuizz(${idQuizz})">Reiniciar Quizz</button>
-                    <button class="reiniciarPagina" onclick="atualizarPagina()">Voltar pra home</button>`
+    let botoes = `  <div class="botoes">
+                        <button class="reiniciarQuizz" onclick="carregarQuizz(${idQuizz})">Reiniciar o Quizz</button>
+                        <button class="reiniciarPagina" onclick="atualizarPagina()">Voltar pra home</button>
+                    </div>`
 
     paginaBase.innerHTML += botoes;
 }

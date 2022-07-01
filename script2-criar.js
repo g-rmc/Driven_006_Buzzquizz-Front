@@ -8,6 +8,7 @@ let corValue=undefined;
 let corretaValue=undefined;
 let corretaUrlValue=undefined;
 let incorretaValue=undefined;
+let incorretaUrlValue=undefined;
 let contadorPerguntas=0;
 let gabarito=undefined;
 let respostas=[];
@@ -119,12 +120,16 @@ function paginaPronto(){
 }
 
 function capturarInfosComeco(){
-    tituloValue = document.getElementById("titulo").value;
+    tituloValue="Quais sao as capitais da america do sul?"
+    //tituloValue = document.getElementById("titulo").value;
     quizzObjeto.title=tituloValue;
-    urlValue = document.getElementById("url").value;
+    urlValue="https://github.com/";
+    //urlValue = document.getElementById("url").value;
     quizzObjeto.image=urlValue;
-    qtdeValue = document.getElementById("qtde").value;
-    nivelValue = document.getElementById("nivel").value;
+    qtdeValue=5;
+    //qtdeValue = document.getElementById("qtde").value;
+    nivelValue=3;
+    //nivelValue = document.getElementById("nivel").value;
     validarInfosComeco();
 }
 
@@ -163,48 +168,55 @@ function validarURL(urlValue){
     return (false);
 }
 
+
 function CapturarInfosPerguntas(){
 
     for(i=1;i<=contadorPerguntas;i++){
+        let contRespostas=0;
 
-        txtValue="Qual a capital do Brasil?";
-        corValue="Preto"
-        //txtValue= document.getElementById(`txtPergunta${i}`).value;
-        //corValue= document.getElementById(`corPergunta${i}`).value; 
-
+        corValue="#BABABA";
+        txtValue= document.getElementById(`txtPergunta${i}`).value;
+        //corValue= document.getElementById(`corPergunta${i}`).value;
+        if(validarTextoCorPergunta(txtValue,corValue)=== false){
+            console.log(i);
+            i=contadorPerguntas;
+            paginaPerguntas()
+        } 
+        
         corretaValue="Brasilia"
-        corretaUrlValue="Foto-Brasilia"
+        corretaUrlValue="https://github.com/"
         //corretaValue = document.getElementById(`respostaPergunta${i}`).value;
         //corretaUrlValue= document.getElementById(`urlPergunta${i}`).value;
-        verdadeiro=true;
-  
-        incorretaValue="Curitiba"
-        incorretaUrlValue="Foto-Curitiba"
+        gabarito=true;
+        checkCorreta();
+                
+        incorretaValue="maringa"
+        incorretaUrlValue="https://github.com/"
         //incorretaValue = document.getElementById(`respostaPergunta1${i}`).value; 
         //incorretaUrlValue= document.getElementById(`urlPergunta1${i}`).value;
         gabarito="false";
-        incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito);
+        if(checkIncorreta()===true)
+           contRespostas++;
 
-        incorretaValue="Rio de Janeiro"
-        incorretaUrlValue="Foto-Rio de Janeiro"
+        incorretaValue="sao paulo"
+        incorretaUrlValue="https://github.com/"
         //incorretaValue = document.getElementById(`respostaPergunta2${i}`).value;
         //incorretaUrlValue= document.getElementById(`urlPergunta2${i}`).value;
         gabarito="false";
-        incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito);
+        if(checkIncorreta()===true)
+        contRespostas++;
 
-        incorretaValue="Vitoria"
-        incorretaUrlValue="Foto-Vitoria"
+        incorretaValue="ponta grossa"
+        incorretaUrlValue="https://github.com/"
         //incorretaValue = document.getElementById(`respostaPergunta3${i}`).value;  
         //incorretaUrlValue= document.getElementById(`urlPergunta3${i}`).value;
         gabarito="false"; 
-        incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito);
-        
-        let objetoCorreto={
-            text:corretaValue,
-            image:corretaUrlValue,
-            isCorrectAnswer:verdadeiro
-        }
-        respostas.push(objetoCorreto)
+         if(checkIncorreta()===true)
+           contRespostas++;
+
+       if(validarNumeroRespostas(contRespostas)=== false){
+        i=contadorPerguntas; paginaPerguntas();
+       }
 
         let perguntaObjeto={
             title:txtValue,
@@ -224,12 +236,71 @@ let quizzObjeto={
 console.log(quizzObjeto) 
 }
 
-function incorretaObjeto(corretaValue,corretaUrlValue,verdadeiro){
+function incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito){
 
     let objetoIncorreto={
-            text:corretaValue,
-            image:corretaUrlValue,
-            isCorrectAnswer:verdadeiro
+            text:incorretaValue,
+            image:incorretaUrlValue,
+            isCorrectAnswer:gabarito
     }
     respostas.push(objetoIncorreto)
+    incorretaValue="";
+    incorretaUrlValue="";
 }
+
+function objetoCorreto(corretaValue,corretaUrlValue,gabarito){
+    let objetoCorreto={
+        text:corretaValue,
+        image:corretaUrlValue,
+        isCorrectAnswer:gabarito
+    }
+    respostas.push(objetoCorreto)
+    corretaValue="";
+    corretaUrlValue="";
+}
+
+function validarNumeroRespostas(contRespostas){
+    if(contRespostas<2){
+        alert("Numero de respostas deve ser entre 2 e 4")
+        respostas=questoes=quizzObjeto=[];
+        return false;
+    }
+}
+
+function validarTextoCorPergunta(txtValue,corValue){
+
+    if(txtValue.length<20){
+        alert("Texto da pergunta deve ter no mínimo 20 caracteres");
+        return false;
+    }
+
+    const regex= /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i;
+    if(regex.test(corValue)===false){
+        alert("Cor de fundo: deve ser uma cor em hexadecimal (começar em '#', seguida de 6 caracteres hexadecimais, ou seja, números ou letras de A a F)");
+        return false;
+    }
+}
+
+function checkCorreta(){
+objetoCorreto(corretaValue,corretaUrlValue,gabarito);
+        if(validarURL(corretaUrlValue)===false){
+            alert("Insira uma URL valida");
+        }
+}
+
+function checkIncorreta(){
+ 
+    if(incorretaValue!=="" && incorretaUrlValue!==""){
+        incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito);
+    }
+        else{
+            alert("Não pode ter resposta vazia");
+            return false;
+        }
+
+    if(validarURL(incorretaUrlValue)===false){        
+            alert("Insira uma URL valida");
+            return false;
+    }
+    return true;
+    }

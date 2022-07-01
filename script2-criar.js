@@ -9,102 +9,101 @@ let corretaValue=undefined;
 let corretaUrlValue=undefined;
 let incorretaValue=undefined;
 let contadorPerguntas=0;
+let gabarito=undefined;
+let respostas=[];
+let questoes=[];
 
 let quizzObjeto={
     title:"",
     image:"",
+    questions:[]
 }
 
 let questions=[{
-    
             title:"",
             color:"",
             answers:[]
+        }]
 
-        }
-    ]
-
-let answers=[
-    {
+let answers=[{
         text:"",
         image:"",
         isCorrectAnswer:""
-    }
-]
+    }]
 
 function paginaComeco(){
     pag1.innerHTML = "";
     pag1.innerHTML += `
-                        <div class="enunciado"><h2>Comece pelo começo</h2></div>
-                        <div class="caixaPerguntas">
-                            <input id="titulo" class="formatação" placeholder="Titulo do seu quizz">
-                            <input id="url" class="formatação" placeholder="URL da imagem do seu quizz">
-                            <input id="qtde" class="formatação"  placeholder="Quantidade de perguntas do quizz">
-                            <input id="nivel" class="formatação" placeholder="Quantidade de níveis do quizz">
-                        </div>
-                        <div class="rodape">
-                            <button onclick="capturarInfosComeco(this)"><h1>Prosseguir para criar perguntas</h1></button>
-                        </div>`
+                    <div class="enunciado"><h2>Comece pelo começo</h2></div>
+                    <div class="caixaPerguntas">
+                        <input id="titulo" class="formatação" placeholder="Titulo do seu quizz">
+                        <input id="url" class="formatação" placeholder="URL da imagem do seu quizz">
+                        <input id="qtde" class="formatação"  placeholder="Quantidade de perguntas do quizz">
+                        <input id="nivel" class="formatação" placeholder="Quantidade de níveis do quizz">
+                    </div>
+                    <div class="rodape">
+                        <button onclick="capturarInfosComeco(this)"><h1>Prosseguir para criar perguntas</h1></button>
+                    </div>`
 }
                
 function paginaPerguntas(){
     pag1.innerHTML="";
     pag1.innerHTML += `
-                        <div class="enunciado"><h2>Crie suas perguntas</h2></div>
-                        <div class="caixaPerguntas"></div>`;
+                    <div class="enunciado"><h2>Crie suas perguntas</h2></div>
+                    <div class="caixaPerguntas"></div>`;
 
     for(let i=1; i<=qtdeValue;i++){
         contadorPerguntas++;
         pag1.innerHTML += `
-                        <h2>Pergunta ${i}</h2>
-                        <input id="txtPergunta${i}" class="formatação" placeholder="Texto da pergunta">
-                        <input id="corPergunta${i}" class="formatação" placeholder="Cor de fundo da pergunta">
-                        <h2>Resposta Correta</h2>
-                        <input id="respostaPergunta${i}" class="formatação" placeholder="Resposta correta">
-                        <input id="urlPergunta${i}" class="formatação" placeholder="URL da imagem">
-                       
-                        <h2>Resposta Incorreta</h2>
-                        <input id="respostaPergunta1${i}" class="formatação" placeholder="Resposta incorreta 1">
-                        <input id="urlPergunta1${i}" class="formatação" placeholder="URL da imagem 1">
+                    <h2>Pergunta ${i}</h2>
+                    <input id="txtPergunta${i}" class="formatação" placeholder="Texto da pergunta">
+                    <input id="corPergunta${i}" class="formatação" placeholder="Cor de fundo da pergunta">
+                    <h2>Resposta Correta</h2>
+                    <input id="respostaPergunta${i}" class="formatação" placeholder="Resposta correta">
+                    <input id="urlPergunta${i}" class="formatação" placeholder="URL da imagem">
+                    
+                    <h2>Resposta Incorreta</h2>
+                    <input id="respostaPergunta1${i}" class="formatação" placeholder="Resposta incorreta 1">
+                    <input id="urlPergunta1${i}" class="formatação" placeholder="URL da imagem 1">
 
-                        <input id="respostaPergunta2${i}" class="formatação" placeholder="Resposta incorreta 2">
-                        <input id="urlPergunta2${i}" class="formatação" placeholder="URL da imagem 2">
+                    <input id="respostaPergunta2${i}" class="formatação" placeholder="Resposta incorreta 2">
+                    <input id="urlPergunta2${i}" class="formatação" placeholder="URL da imagem 2">
 
-                        <input id="respostaPergunta3${i}" class="formatação" placeholder="Resposta incorreta 3">
-                        <input id="urlPergunta3${i}" class="formatação" placeholder="URL da imagem 3">
-                        `
+                    <input id="respostaPergunta3${i}" class="formatação" placeholder="Resposta incorreta 3">
+                    <input id="urlPergunta3${i}" class="formatação" placeholder="URL da imagem 3">
+                    `
             }
                   pag1.innerHTML += ` <div class="rodape">
-                                      <button onclick="CapturarInfosPerguntas(this)"><h1>Prosseguir para criar níveis</h1></button>
- </div>`
+                    <button onclick="CapturarInfosPerguntas(this)"><h1>Prosseguir para criar níveis</h1></button>
+                    </div>`
 }
 
 function paginaNiveis(){
     let pag3 = document.querySelector('.paginaQuizz');
     pag3.innerHTML += `
-                        <div class="enunciado"><h2>Agora,decida os níveis!</h2></div>
-                        <div class="caixaPerguntas">
-                            <h2>Nível 1</h2>
-                            <input id="campo1" placeholder="Título do nível">
-                            <input id="campo1" placeholder="% de acerto mínima">
-                            <input id="campo1" placeholder="URL da imagem do nível">
-                            <input id="campo5" placeholder="Descrição do nível">
-                        </div>
-                        <div class="rodape">
-                            <button onclick="validarDados(this)"><h1>Finalizar quiz</h1></button>
-                        </div>`
+                    <div class="enunciado"><h2>Agora,decida os níveis!</h2></div>
+                    <div class="caixaPerguntas">
+                        <h2>Nível 1</h2>
+                        <input id="campo1" placeholder="Título do nível">
+                        <input id="campo1" placeholder="% de acerto mínima">
+                        <input id="campo1" placeholder="URL da imagem do nível">
+                        <input id="campo5" placeholder="Descrição do nível">
+                    </div>
+                    <div class="rodape">
+                        <button onclick="validarDados(this)"><h1>Finalizar quiz</h1></button>
+                    </div>`
 }
 
 function paginaPronto(){
     let pag4 = document.querySelector('.paginaQuizz');
     pag4.innerHTML += `
-                        <div class="enunciado"><h2>Seu quiz esta pronto!</h2></div>
-                        <div class="caixaPerguntas">
-                        </div>
-                        <div class="rodape">
-                            <button onclick="validarDados(this)"><h1>Acessar quizz</h1></button>
-                        <div><h1>Voltar para home</h1></div>
-                        </div>`
+                    <div class="enunciado"><h2>Seu quiz esta pronto!</h2></div>
+                    <div class="caixaPerguntas">
+                    </div>
+                    <div class="rodape">
+                        <button onclick="validarDados(this)"><h1>Acessar quizz</h1></button>
+                    <div><h1>Voltar para home</h1></div>
+                    </div>`
 }
 
 function capturarInfosComeco(){
@@ -144,7 +143,6 @@ function validarInfosComeco(){
     }
 }
 
-
 function validarURL(urlValue){
     let urlregex = new RegExp("^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
     if (urlregex.test(urlValue)) {
@@ -156,44 +154,70 @@ function validarURL(urlValue){
 function CapturarInfosPerguntas(){
 
     for(i=1;i<=contadorPerguntas;i++){
-        txtValue= document.getElementById(`txtPergunta${i}`).value;
-        questions.title=txtValue; 
-        console.log(questions.title);
 
-        corValue= document.getElementById(`corPergunta${i}`).value;
-        questions.color=corValue;  
+        txtValue="Qual a capital do Brasil?";
+        corValue="Preto"
+        //txtValue= document.getElementById(`txtPergunta${i}`).value;
+        //corValue= document.getElementById(`corPergunta${i}`).value; 
 
-        corretaValue = document.getElementById(`respostaPergunta${i}`).value;
-        answers.text=corretaValue;  
-        console.log(answers.text);
-        corretaUrlValue= document.getElementById(`urlPergunta${i}`).value;
-        answers.image=corretaUrlValue;
-        answers.isCorrectAnswer="true";
-    
-        incorretaValue = document.getElementById(`respostaPergunta1${i}`).value;
-        answers.text=incorretaValue;  
-        incorretaUrlValue= document.getElementById(`urlPergunta1${i}`).value;
-        answers.image=incorretaUrlValue;
-        answers.isCorrectAnswer="false";
+        corretaValue="Brasilia"
+        corretaUrlValue="Foto-Brasilia"
+        //corretaValue = document.getElementById(`respostaPergunta${i}`).value;
+        //corretaUrlValue= document.getElementById(`urlPergunta${i}`).value;
+        verdadeiro=true;
+  
+        incorretaValue="Curitiba"
+        incorretaUrlValue="Foto-Curitiba"
+        //incorretaValue = document.getElementById(`respostaPergunta1${i}`).value; 
+        //incorretaUrlValue= document.getElementById(`urlPergunta1${i}`).value;
+        gabarito="false";
+        incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito);
 
-        incorretaValue = document.getElementById(`respostaPergunta2${i}`).value;
-        answers.text=incorretaValue;  
-        incorretaUrlValue= document.getElementById(`urlPergunta2${i}`).value;
-        answers.image=incorretaUrlValue;
-        answers.isCorrectAnswer="false";
+        incorretaValue="Rio de Janeiro"
+        incorretaUrlValue="Foto-Rio de Janeiro"
+        //incorretaValue = document.getElementById(`respostaPergunta2${i}`).value;
+        //incorretaUrlValue= document.getElementById(`urlPergunta2${i}`).value;
+        gabarito="false";
+        incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito);
 
-        incorretaValue = document.getElementById(`respostaPergunta3${i}`).value;
-        answers.text=incorretaValue;  
-        incorretaUrlValue= document.getElementById(`urlPergunta3${i}`).value;
-        answers.image=incorretaUrlValue;
-        answers.isCorrectAnswer="false";      
-        console.log(answers);     
+        incorretaValue="Vitoria"
+        incorretaUrlValue="Foto-Vitoria"
+        //incorretaValue = document.getElementById(`respostaPergunta3${i}`).value;  
+        //incorretaUrlValue= document.getElementById(`urlPergunta3${i}`).value;
+        gabarito="false"; 
+        incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito);
+        
+        let objetoCorreto={
+            text:corretaValue,
+            image:corretaUrlValue,
+            isCorrectAnswer:verdadeiro
+        }
+        respostas.push(objetoCorreto)
 
-    }
-    enviarObjeto();
+        let perguntaObjeto={
+            title:txtValue,
+            color:corValue,
+            answers:respostas
+        }
+        respostas=[];
+        questoes.push(perguntaObjeto);
+
 }
-function enviarObjeto(){
-    
+let quizzObjeto={
+    title:tituloValue,
+    image:urlValue,
+    questions:questoes
+}
 
-   
+console.log(quizzObjeto) 
+}
+
+function incorretaObjeto(corretaValue,corretaUrlValue,verdadeiro){
+
+    let objetoIncorreto={
+            text:corretaValue,
+            image:corretaUrlValue,
+            isCorrectAnswer:verdadeiro
+    }
+    respostas.push(objetoIncorreto)
 }

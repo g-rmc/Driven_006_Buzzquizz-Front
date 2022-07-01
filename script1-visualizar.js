@@ -53,7 +53,7 @@ function renderizarQuizzes(obj){
 
                 divPaiMeusQuizzes.innerHTML = ` <div class="todosQuizzes">
                                                     <span>
-                                                        <h1>Meus Quizzes</h1>
+                                                        <h1>Seus Quizzes</h1>
                                                         <ion-icon name="add-circle"
                                                         onclick="paginaComeco()"
                                                         class="botaoAdicionar"></ion-icon>

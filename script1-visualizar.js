@@ -9,9 +9,11 @@ function carregarPaginaInicial(){
 
     paginaBase.innerHTML = "";
 
-    paginaBase.innerHTML = `    <div class="meusQuizzes">
-                                    <h3>Você não criou nenhum</br>quizz ainda :(</h3> 
-                                    <button onclick="paginaComeco()">Criar Quizz</button>
+    paginaBase.innerHTML = `    <div>
+                                    <div class="meusQuizzes">
+                                        <h3>Você não criou nenhum</br>quizz ainda :(</h3> 
+                                        <button onclick="paginaComeco()">Criar Quizz</button>
+                                    </div>
                                 </div>
 
                                 <div class="todosQuizzes">
@@ -23,7 +25,7 @@ function carregarPaginaInicial(){
 }
 
 function carregarQuizzes(){
-    let promise = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
+    let promise = axios.get('https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes');
     promise.then(renderizarQuizzes);
     promise.catch(alertaErro);
 }
@@ -31,22 +33,67 @@ function carregarQuizzes(){
 function renderizarQuizzes(obj){
     let array = obj.data;
     numQuizzes = array.length;
-    
-    let divQuizzes = document.querySelector(".quizzes");
 
-    divQuizzes.innerHTML = ""
+    let divMeusQuizzes = document.querySelector(".meusQuizzes");
+    let divPaiMeusQuizzes = divMeusQuizzes.parentElement;
+    let divTodosQuizzes = document.querySelector(".todosQuizzes div");
 
     for (let i = 0; i < numQuizzes; i++){
         
         let quizz = array[i];
 
-        let html =  `   <div class="quizz"
-                        style="background-image: url('${quizz.image}');"
-                        onclick="carregarQuizz(${quizz.id})">
-                            <div>${quizz.title}</div>
-                        </div>`;
+        if (validarIdUsuario(quizz.id)){
 
-        divQuizzes.innerHTML += html;
+            if (document.querySelector(".meusQuizzes") !== null){
+
+                console.log(divMeusQuizzes);
+
+                divPaiMeusQuizzes.innerHTML = ` <div class="todosQuizzes">
+                                                    <span>
+                                                        <h1>Meus Quizzes</h1>
+                                                        <ion-icon name="add-circle"
+                                                        onclick="paginaComeco()"
+                                                        class="botaoAdicionar"></ion-icon>
+                                                    </span>
+                                                    <div class="quizzes"></div>
+                                                </div>`
+
+                console.log(divPaiMeusQuizzes);
+
+                divMeusQuizzes = divPaiMeusQuizzes.querySelector(".quizzes");
+
+                console.log(divMeusQuizzes);
+            }
+
+            let html =  `   <div class="quizz"
+                            style="background-image: url('${quizz.image}');"
+                            onclick="carregarQuizz(${quizz.id})">
+                                <div>${quizz.title}</div>
+                            </div>`;
+
+            divMeusQuizzes.innerHTML += html;
+
+        } else {
+
+            let html =  `   <div class="quizz"
+                            style="background-image: url('${quizz.image}');"
+                            onclick="carregarQuizz(${quizz.id})">
+                                <div>${quizz.title}</div>
+                            </div>`;
+
+            divTodosQuizzes.innerHTML += html;
+        
+        }
+    }
+}
+
+function validarIdUsuario(id){
+    //Verificar quais são os IDs dos quizzes criados pelo usuário
+
+    if (id === 4){
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -57,7 +104,7 @@ function alertaErro(obj){
 }
 
 function carregarQuizz(id){
-    let promise = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id}`);
+    let promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${id}`);
     promise.then(renderizarQuizz);
     promise.catch(alertaErro);
 }
@@ -96,7 +143,7 @@ function renderizarQuizz(obj){
 
             divRespostas.innerHTML += ` <div class="resposta-${resposta.isCorrectAnswer}">
                                             <img src="${resposta.image}">
-                                            <h2>${resposta.tilte}</h2>
+                                            <h2>${resposta.text}</h2>
                                         </div>`
         }
 
@@ -110,3 +157,12 @@ function comparador() {
 }
 
 carregarPaginaInicial();
+
+//FUNÇÃO PARA CARREGAR UM OBJETO DE QUIZZ SEMPPRE
+
+function AUX (id) {
+    let promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${id}`);
+    promise.then(obj => console.log(obj.data))
+}
+
+AUX (1);

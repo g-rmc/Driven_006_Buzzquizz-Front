@@ -49,33 +49,45 @@ function paginaComeco(){
 function paginaPerguntas(){
     pag1.innerHTML="";
     pag1.innerHTML += `
-                    <div class="enunciado"><h2>Crie suas perguntas</h2></div>
-                    <div class="caixaPerguntas"></div>`;
+                    <div class="enunciado"><h2>Crie suas perguntas</h2></div>`;
 
     for(let i=1; i<=qtdeValue;i++){
         contadorPerguntas++;
         pag1.innerHTML += `
-                    <h2>Pergunta ${i}</h2>
-                    <input id="txtPergunta${i}" class="formatação" placeholder="Texto da pergunta">
-                    <input id="corPergunta${i}" class="formatação" placeholder="Cor de fundo da pergunta">
-                    <h2>Resposta Correta</h2>
-                    <input id="respostaPergunta${i}" class="formatação" placeholder="Resposta correta">
-                    <input id="urlPergunta${i}" class="formatação" placeholder="URL da imagem">
+                <div class="caixaPerguntas">
+                    <div>
+                        <h2>Pergunta ${i}</h2>
+                        <input id="txtPergunta${i}" class="formatação" placeholder="Texto da pergunta">
+                        <input id="corPergunta${i}" class="formatação" placeholder="Cor de fundo da pergunta">
+                    </div>
+
+                    <div>
+                        <h2>Resposta Correta</h2>
+                        <input id="respostaPergunta${i}" class="formatação" placeholder="Resposta correta">
+                        <input id="urlPergunta${i}" class="formatação" placeholder="URL da imagem">
+                    </div>
                     
-                    <h2>Resposta Incorreta</h2>
-                    <input id="respostaPergunta1${i}" class="formatação" placeholder="Resposta incorreta 1">
-                    <input id="urlPergunta1${i}" class="formatação" placeholder="URL da imagem 1">
+                    <div>
+                        <h2>Respostas Incorretas</h2>
+                        <input id="respostaPergunta1${i}" class="formatação" placeholder="Resposta incorreta 1">
+                        <input id="urlPergunta1${i}" class="formatação" placeholder="URL da imagem 1">
 
-                    <input id="respostaPergunta2${i}" class="formatação" placeholder="Resposta incorreta 2">
-                    <input id="urlPergunta2${i}" class="formatação" placeholder="URL da imagem 2">
+                        <div class="afastamento"></div>
+                    
+                        <input id="respostaPergunta2${i}" class="formatação" placeholder="Resposta incorreta 2">
+                        <input id="urlPergunta2${i}" class="formatação" placeholder="URL da imagem 2">
 
-                    <input id="respostaPergunta3${i}" class="formatação" placeholder="Resposta incorreta 3">
-                    <input id="urlPergunta3${i}" class="formatação" placeholder="URL da imagem 3">
-                    `
-            }
-                  pag1.innerHTML += ` <div class="rodape">
-                    <button onclick="CapturarInfosPerguntas(this)"><h1>Prosseguir para criar níveis</h1></button>
-                    </div>`
+                        <div class="afastamento"></div>
+
+                        <input id="respostaPergunta3${i}" class="formatação" placeholder="Resposta incorreta 3">
+                        <input id="urlPergunta3${i}" class="formatação" placeholder="URL da imagem 3">
+                    </div>
+                </div>`
+    }
+    
+    pag1.innerHTML += ` <div class="rodape">
+                            <button onclick="CapturarInfosPerguntas(this)"><h1>Prosseguir para criar níveis</h1></button>
+                        </div>`
 }
 
 function paginaNiveis(){

@@ -55,6 +55,12 @@ body{
     font-size: 20px;
     line-height: 23px;
     color: #000000;
+    margin-top: 40px;
+}
+
+.afastamento{
+    height: 30px;
+    width: 100%;
 }
 
 .caixaPerguntas{
@@ -64,8 +70,8 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    padding: 20px 0px 20px 0px;
-    margin: 0 auto;
+    padding: 20px;
+    margin: 20px auto;
 }
 
 .paginaQuizz input{
@@ -175,6 +181,12 @@ body{
     font-weight: 700;
 }
 
+.todosQuizzes span {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
 .quizzes {
     display: flex;
     justify-content: space-between;
@@ -203,6 +215,12 @@ body{
     align-items: flex-end;
     justify-content: flex-start;
     padding: 18px;
+}
+
+.botaoAdicionar {
+    font-size: 30px;
+    color: #EC362D;
+    margin-left: 15px;
 }
 
 button:hover, .quizz:hover {
@@ -279,9 +297,11 @@ button:hover, .quizz:hover {
 
 .resposta-pergunta h2 {
     font-weight: 700;
-    font-size: 18px;
-    line-height: 23px;
+    font-size: 16px;
+    line-height: 22px;
     margin-top: 5px;
+    max-width: 330px;
+    height: 44px;
 }
 
 /* INICIO RESPONSIVO MOBILE */

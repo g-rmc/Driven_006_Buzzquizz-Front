@@ -27,6 +27,7 @@ body{
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 1;
 }
 
 .topo h1{
@@ -183,6 +184,7 @@ body{
 .todosQuizzes h1{
     font-size: 20px;
     font-weight: 700;
+    margin-left: 10px;
 }
 
 .todosQuizzes span {
@@ -193,7 +195,7 @@ body{
 
 .quizzes {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
 }
 
@@ -201,6 +203,7 @@ body{
     height: 180px;
     width: 340px;
     margin-top: 12px;
+    margin-left: 10px;
     border-radius: 5px;
     background-size: cover;    
 }
@@ -302,6 +305,10 @@ body{
     margin-top: 5px;
     max-width: 330px;
     height: 44px;
+}
+
+.resposta-pergunta div {
+    transition: opacity 300ms;
 }
 
 .filtroBranco {

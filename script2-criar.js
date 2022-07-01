@@ -74,6 +74,11 @@ function paginaPerguntas(){
     for(let i=1; i<=qtdeValue;i++){
         contadorPerguntas++;
         pag.innerHTML += `
+            <div class="perguntaBloco" onclick="removerBloco(${i})">
+            <h2>Pergunta ${i}</h2>
+            <ion-icon class="icone-exp" name="create-outline"></ion-icon>
+            </div>
+                <div class="pergunta${i} escondido">
                 <div class="caixaPerguntas">
                     <div>
                         <h2>Pergunta ${i}</h2>
@@ -102,6 +107,7 @@ function paginaPerguntas(){
                         <input id="respostaPergunta3${i}" class="formatação" placeholder="Resposta incorreta 3">
                         <input id="urlPergunta3${i}" class="formatação" placeholder="URL da imagem 3">
                     </div>
+                </div>
                 </div>`
     }
     
@@ -135,8 +141,8 @@ function paginaPronto(){
     pag = document.querySelector('.paginaQuizz');
     pag.innerHTML += `
                     <div class="enunciado"><h2>Seu quiz esta pronto!</h2></div>
-                    <div class="caixaPerguntas">
-                    <img src="urlValue">
+                    <div class="caixaImagem" style="background-image: url('${urlValue}'">
+                    <p>${tituloValue}</p>
                     </div>
                     <div class="rodape">
                         <button onclick="validarDados(this)"><h1>Acessar quizz</h1></button>
@@ -145,10 +151,10 @@ function paginaPronto(){
 }
 
 function capturarInfosComeco(){
-    tituloValue="Quais sao as capitais da america do sul?"
+    tituloValue="Quais sao as capitais da América do Sul?"
     //tituloValue = document.getElementById("titulo").value;
     quizzObjeto.title=tituloValue;
-    urlValue="https://www.infoescola.com/wp-content/uploads/2007/07/america-do-sul.jpg";
+    urlValue="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/South_America_%28orthographic_projection%29.svg/250px-South_America_%28orthographic_projection%29.svg.png";
     //urlValue = document.getElementById("url").value;
     quizzObjeto.image=urlValue;
     qtdeValue=3;
@@ -399,4 +405,10 @@ function enviarObjeto(quizzObjeto){
     paginaPronto();
     //const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizzObjeto);
     promise.then(paginaPronto)
+}
+
+function removerBloco(pergunta){
+    const remover = document.querySelector(`.pergunta${pergunta}`);
+    console.log(remover);
+    remover.classList.toggle("escondido");
 }

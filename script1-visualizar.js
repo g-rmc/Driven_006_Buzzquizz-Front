@@ -1,4 +1,9 @@
+let quizzObj;
+let idQuizz;
 let numQuizzes = 0;
+let respostasDadas = 0;
+let respostasCorretas = 0;
+
 const paginaBase = document.querySelector(".paginaQuizz");
 
 function atualizarPagina(){
@@ -84,7 +89,7 @@ function renderizarQuizzes(obj){
 function validarIdUsuario(id){
     //Verificar quais são os IDs dos quizzes criados pelo usuário
 
-    if (id === 4){
+    if (id === 6 || id === 1){
         return true;
     } else {
         return false;
@@ -98,6 +103,7 @@ function alertaErro(obj){
 }
 
 function carregarQuizz(id){
+    idQuizz = id;
     let promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${id}`);
     promise.then(renderizarQuizz);
     promise.catch(alertaErro);
@@ -105,17 +111,19 @@ function carregarQuizz(id){
 
 function renderizarQuizz(obj){
 
-    let quizz = obj.data;
+    window.scrollTo(0, 0);
+
+    quizzObj = obj;
 
     paginaBase.innerHTML = "";
 
-    paginaBase.innerHTML = `    <div class="banner" style="background-image: url('${quizz.image}');"> 
+    paginaBase.innerHTML = `    <div class="banner" style="background-image: url('${quizzObj.data.image}');"> 
                                     <div>
-                                        <h1>${quizz.title}</h1>
+                                        <h1>${quizzObj.data.title}</h1>
                                     </div>
                                 </div>`;
 
-    let perguntas = quizz.questions;
+    let perguntas = quizzObj.data.questions;
     
     for (let i = 0; i < perguntas.length; i++){
 
@@ -150,6 +158,12 @@ function renderizarQuizz(obj){
 function selecionarResposta(divSelecionada) {
     let listaRespostas = divSelecionada.parentElement.querySelectorAll("div");
 
+    if (divSelecionada.classList[0] === "resposta-true") {
+        respostasCorretas += 1;
+    }
+    respostasDadas += 1;
+
+
     for (let i = 0; i < listaRespostas.length; i++){
         let divAnalisada = listaRespostas[i]
         divAnalisada.removeAttribute("onclick");
@@ -159,6 +173,7 @@ function selecionarResposta(divSelecionada) {
         if (resposta[0] === "resposta-true") {
             divAnalisada.classList.remove("resposta-true");
             divAnalisada.classList.add("cor-true");
+            
         } else {
             divAnalisada.classList.remove("resposta-false");
             divAnalisada.classList.add("cor-false");
@@ -176,9 +191,57 @@ function proximaPergunta(divAtual){
 
     let pergunta = divAtual.parentElement.parentElement
 
-    console.log(pergunta.nextElementSibling);
+    if(pergunta.nextElementSibling !== null){
+        pergunta.nextElementSibling.scrollIntoView({ behavior: 'smooth', block: "center"})
+    } else {
+        calcularResultado();
+        document.querySelector(".resultado").scrollIntoView({ behavior: 'smooth', block: "center"});
+    }
+}
 
-    pergunta.nextElementSibling.scrollIntoView({ behavior: 'smooth', block: 'center' })
+function calcularResultado() {
+
+    let levels = quizzObj.data.levels;
+    let pontuacao = ((respostasCorretas/respostasDadas)*100).toFixed(0);
+    let idLevelAlcancado = 0
+
+    levels.sort(organizarLevel);
+
+    for (let i = 0; i < levels.length; i++) {
+        if (pontuacao > levels[i].minValue){
+            idLevelAlcancado = i
+        }
+    }
+
+    let objLevelAlcancado = levels[idLevelAlcancado];
+
+    renderizarResultado(objLevelAlcancado);
+}
+
+function renderizarResultado(obj){
+
+    let divResultado = `    <div class="resultado">
+                                <div class="titulo-resultado" style="background-color: #EC362D;">${obj.title}</div>
+                                <span>
+                                    <img src="${obj.image}" class="imagem-resultado">
+                                    <h2>${obj.text}</h2>
+                                </span>
+                            </div>`;
+
+    paginaBase.innerHTML += divResultado;
+
+    let botoes = `  <button class="reiniciarQuizz" onclick="carregarQuizz(${idQuizz})">Reiniciar Quizz</button>
+                    <button class="reiniciarPagina" onclick="atualizarPagina()">Voltar pra home</button>`
+
+    paginaBase.innerHTML += botoes;
+}
+
+function organizarLevel(a, b) {
+    if (a.minValue < b.minValue){
+        return -1;
+    } else {
+        return 1;
+    }
 }
 
 function comparador() { 

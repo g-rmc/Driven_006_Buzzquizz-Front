@@ -1,4 +1,5 @@
 let quizzObj;
+let idQuizz;
 let numQuizzes = 0;
 let respostasDadas = 0;
 let respostasCorretas = 0;
@@ -102,6 +103,7 @@ function alertaErro(obj){
 }
 
 function carregarQuizz(id){
+    idQuizz = id;
     let promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${id}`);
     promise.then(renderizarQuizz);
     promise.catch(alertaErro);
@@ -109,17 +111,19 @@ function carregarQuizz(id){
 
 function renderizarQuizz(obj){
 
-    quizzObj = obj.data;
+    window.scrollTo(0, 0);
+
+    quizzObj = obj;
 
     paginaBase.innerHTML = "";
 
-    paginaBase.innerHTML = `    <div class="banner" style="background-image: url('${quizzObj.image}');"> 
+    paginaBase.innerHTML = `    <div class="banner" style="background-image: url('${quizzObj.data.image}');"> 
                                     <div>
-                                        <h1>${quizzObj.title}</h1>
+                                        <h1>${quizzObj.data.title}</h1>
                                     </div>
                                 </div>`;
 
-    let perguntas = quizzObj.questions;
+    let perguntas = quizzObj.data.questions;
     
     for (let i = 0; i < perguntas.length; i++){
 
@@ -188,16 +192,16 @@ function proximaPergunta(divAtual){
     let pergunta = divAtual.parentElement.parentElement
 
     if(pergunta.nextElementSibling !== null){
-        pergunta.nextElementSibling.scrollIntoView({ behavior: 'smooth'})
+        pergunta.nextElementSibling.scrollIntoView({ behavior: 'smooth', block: "center"})
     } else {
         calcularResultado();
-        document.querySelector(".resultado").scrollIntoView({ behavior: 'smooth'});
+        document.querySelector(".resultado").scrollIntoView({ behavior: 'smooth', block: "center"});
     }
 }
 
 function calcularResultado() {
 
-    let levels = quizzObj.levels;
+    let levels = quizzObj.data.levels;
     let pontuacao = ((respostasCorretas/respostasDadas)*100).toFixed(0);
     let idLevelAlcancado = 0
 
@@ -215,7 +219,6 @@ function calcularResultado() {
 }
 
 function renderizarResultado(obj){
-    console.log(obj);
 
     let divResultado = `    <div class="resultado">
                                 <div class="titulo-resultado" style="background-color: #EC362D;">${obj.title}</div>
@@ -226,6 +229,11 @@ function renderizarResultado(obj){
                             </div>`;
 
     paginaBase.innerHTML += divResultado;
+
+    let botoes = `  <button class="reiniciarQuizz" onclick="carregarQuizz(${idQuizz})">Reiniciar Quizz</button>
+                    <button class="reiniciarPagina" onclick="atualizarPagina()">Voltar pra home</button>`
+
+    paginaBase.innerHTML += botoes;
 }
 
 function organizarLevel(a, b) {

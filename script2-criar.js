@@ -23,6 +23,7 @@ let descricaoNivel=undefined;
 let descricaoNivelValue=undefined;
 let acertoPorcentagem=undefined;
 let acertoPorcentagemNivelValue=undefined;
+let checkAcertoMin=0;
 
 let quizzObjeto={
     title:"",
@@ -250,35 +251,46 @@ paginaNiveis();
 }
 
 function CapturarInfosNiveis(){
-    for(let i=1;i<=nivelValue;i++){
 
-        txtNivelValue="Nivel facil";
+    for(let i=1;i<=nivelValue;i++){
+        console.log(i);
+       
+        txtNivelValue="Nivel dificil"
         //txtNivelValue=document.getElementById(`tituloNivel${i}`).value;
-        acertoPorcentagemNivelValue="80%";
-        //acertoPorcentagemNivelValue=document.getElementById(`acertoPorcentagem${i}`).value;
-       urlImagemNivelValue="https://www.w3schools.com/"
-       // urlImagemNivelValue=document.getElementById(`urlImagemNivel${i}`).value;
-        descricaoNivelValue="pppppppppppppppppppppppppppppppppppppp"
+        acertoPorcentagemNivelValue=70;
+       // acertoPorcentagemNivelValue=document.getElementById(`acertoPorcentagem${i}`).value;
+       urlImagemNivelValue="https://www.w3schools.com/";
+        //urlImagemNivelValue=document.getElementById(`urlImagemNivel${i}`).value;
+        descricaoNivelValue="pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp";
         //descricaoNivelValue=document.getElementById(`descricaoNivel${i}`).value;
 
-        let niveisObjeto={
-            title:txtNivelValue,
-            image:urlImagemNivelValue,
-            text:descricaoNivelValue,
-            minValue:acertoPorcentagemNivelValue
-        }
-        niveis.push(niveisObjeto);
+       if(acertoPorcentagemNivelValue>0)
+            checkAcertoMin++;
 
+       if(checkInfosNiveis()=== false){
+        return paginaNiveis();
+       }
+
+       else{
+                let niveisObjeto={
+                    title:txtNivelValue,
+                    image:urlImagemNivelValue,
+                    text:descricaoNivelValue,
+                    minValue:acertoPorcentagemNivelValue
+                }
+                niveis.push(niveisObjeto);
+        }
     }
 
-        let quizzObjeto={
-            title:tituloValue,
-            image:urlValue,
-            questions:questoes,
-            levels: niveis
-        }
-        
-    console.log(quizzObjeto);
+   let quizzObjeto={
+    title:tituloValue,
+    image:urlValue,
+    questions:questoes,
+    levels: niveis
+    }
+
+console.log(quizzObjeto);
+enviarObjeto(quizzObjeto);
 }
 
 function incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito){
@@ -348,4 +360,40 @@ function checkIncorreta(){
             return false;
     }
     return true;
+}
+
+
+function checkInfosNiveis(){
+
+    if(txtNivelValue.length<10){
+        alert("Título do nível: mínimo de 10 caracteres");
+        return false;
     }
+
+    else if(acertoPorcentagemNivelValue<0|| acertoPorcentagemNivelValue>100){
+        alert("% de acerto mínima: um número entre 0 e 100");
+        return false;
+    }
+
+    else if(validarURL(urlImagemNivelValue)=== false){
+        alert("URL da imagem do nível: deve ter formato de URL");
+        return false;
+    }
+
+    else if(descricaoNivelValue.length<30){
+        alert("Descrição do nível: mínimo de 30 caracteres");
+        return false;
+    }
+
+    else if(checkAcertoMin===0){
+        alert("É obrigatório existir pelo menos 1 nível cuja % de acerto mínima seja 0%");
+        return false;
+    }
+    else return true;
+}
+
+function enviarObjeto(quizzObjeto){
+
+    const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizzObjeto);
+    promise.then(paginaPronto)
+}

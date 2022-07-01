@@ -5,6 +5,10 @@
     background-position: center;
 }
 
+[onClick] {
+    cursor:pointer;
+}
+
 body{
     width:100%;
     background: #fcf9f9;
@@ -223,10 +227,6 @@ body{
     margin-left: 15px;
 }
 
-button:hover, .quizz:hover {
-    cursor: pointer;
-}
-
 /* TELA DE QUIZZ */
 
 .banner {
@@ -302,6 +302,18 @@ button:hover, .quizz:hover {
     margin-top: 5px;
     max-width: 330px;
     height: 44px;
+}
+
+.filtroBranco {
+    opacity: 30%;
+}
+
+.cor-true {
+    color: #009c22;
+}
+
+.cor-false {
+    color: #ff4b4b;
 }
 
 /* INICIO RESPONSIVO MOBILE */

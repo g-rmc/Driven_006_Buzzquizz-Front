@@ -46,8 +46,6 @@ function renderizarQuizzes(obj){
 
             if (document.querySelector(".meusQuizzes") !== null){
 
-                console.log(divMeusQuizzes);
-
                 divPaiMeusQuizzes.innerHTML = ` <div class="todosQuizzes">
                                                     <span>
                                                         <h1>Meus Quizzes</h1>
@@ -58,11 +56,7 @@ function renderizarQuizzes(obj){
                                                     <div class="quizzes"></div>
                                                 </div>`
 
-                console.log(divPaiMeusQuizzes);
-
                 divMeusQuizzes = divPaiMeusQuizzes.querySelector(".quizzes");
-
-                console.log(divMeusQuizzes);
             }
 
             let html =  `   <div class="quizz"
@@ -141,7 +135,8 @@ function renderizarQuizz(obj){
 
             let resposta = respostas[i];
 
-            divRespostas.innerHTML += ` <div class="resposta-${resposta.isCorrectAnswer}">
+            divRespostas.innerHTML += ` <div class="resposta-${resposta.isCorrectAnswer}"
+                                        onclick = "selecionarResposta(this)">
                                             <img src="${resposta.image}">
                                             <h2>${resposta.text}</h2>
                                         </div>`
@@ -150,6 +145,40 @@ function renderizarQuizz(obj){
 
     }
 
+}
+
+function selecionarResposta(divSelecionada) {
+    let listaRespostas = divSelecionada.parentElement.querySelectorAll("div");
+
+    for (let i = 0; i < listaRespostas.length; i++){
+        let divAnalisada = listaRespostas[i]
+        divAnalisada.removeAttribute("onclick");
+
+        let resposta = divAnalisada.classList;
+
+        if (resposta[0] === "resposta-true") {
+            divAnalisada.classList.remove("resposta-true");
+            divAnalisada.classList.add("cor-true");
+        } else {
+            divAnalisada.classList.remove("resposta-false");
+            divAnalisada.classList.add("cor-false");
+        }
+
+        if (divAnalisada !== divSelecionada){
+            divAnalisada.classList.add("filtroBranco")
+        }
+    }
+
+    setTimeout(proximaPergunta, 2000, divSelecionada);
+}
+
+function proximaPergunta(divAtual){
+
+    let pergunta = divAtual.parentElement.parentElement
+
+    console.log(pergunta.nextElementSibling);
+
+    pergunta.nextElementSibling.scrollIntoView({ behavior: 'smooth', block: 'center' })
 }
 
 function comparador() { 

@@ -93,13 +93,9 @@ body{
     margin-bottom: 10px;
 }
 
-#campo5{
+.descricaoNivelFormatacao{
     height:180px;
     display:flex;
-}
-
-#campo2{
-    margin-bottom: 35px;
 }
 
 .rodape{

@@ -1,4 +1,4 @@
-let pag1 = document.querySelector('.paginaQuizz');
+let pag = document.querySelector('.paginaQuizz');
 let tituloValue=undefined;
 let urlValue=undefined;
 let qtdeValue=undefined;
@@ -52,8 +52,8 @@ let answers=[{
     }]
 
 function paginaComeco(){
-    pag1.innerHTML = "";
-    pag1.innerHTML += `
+    pag.innerHTML = "";
+    pag.innerHTML += `
                     <div class="enunciado"><h2>Comece pelo começo</h2></div>
                     <div class="caixaPerguntas">
                         <input id="titulo" class="formatação" placeholder="Titulo do seu quizz">
@@ -67,13 +67,13 @@ function paginaComeco(){
 }
                
 function paginaPerguntas(){
-    pag1.innerHTML="";
-    pag1.innerHTML += `
+    pag.innerHTML="";
+    pag.innerHTML += `
                     <div class="enunciado"><h2>Crie suas perguntas</h2></div>`;
 
     for(let i=1; i<=qtdeValue;i++){
         contadorPerguntas++;
-        pag1.innerHTML += `
+        pag.innerHTML += `
                 <div class="caixaPerguntas">
                     <div>
                         <h2>Pergunta ${i}</h2>
@@ -105,17 +105,17 @@ function paginaPerguntas(){
                 </div>`
     }
     
-    pag1.innerHTML += ` <div class="rodape">
+    pag.innerHTML += ` <div class="rodape">
                             <button onclick="CapturarInfosPerguntas(this)"><h1>Prosseguir para criar níveis</h1></button>
                         </div>`
 }
 
 function paginaNiveis(){
-    pag1.innerHTML = "";
+    pag.innerHTML = "";
     
-    pag1.innerHTML+=`<div class="enunciado"><h2>Agora,decida os níveis!</h2></div>`
+    pag.innerHTML+=`<div class="enunciado"><h2>Agora,decida os níveis!</h2></div>`
     for(let i=1; i<=nivelValue;i++){
-    pag1.innerHTML += `
+    pag.innerHTML += `
                     <div class="caixaPerguntas">
                         <h2>Nível ${i}</h2>
                         <input id="tituloNivel${i}" class="formatação" placeholder="Título do nível">
@@ -125,16 +125,18 @@ function paginaNiveis(){
                     </div>
                     `
     }
-    pag1.innerHTML+=` <div class="rodape">
+    pag.innerHTML+=` <div class="rodape">
     <button onclick="CapturarInfosNiveis(this)"><h1>Finalizar quiz</h1></button>
     </div>`
 }
 
 function paginaPronto(){
-    let pag4 = document.querySelector('.paginaQuizz');
-    pag4.innerHTML += `
+    pag.innerHTML = "";
+    pag = document.querySelector('.paginaQuizz');
+    pag.innerHTML += `
                     <div class="enunciado"><h2>Seu quiz esta pronto!</h2></div>
                     <div class="caixaPerguntas">
+                    <img src="urlValue">
                     </div>
                     <div class="rodape">
                         <button onclick="validarDados(this)"><h1>Acessar quizz</h1></button>
@@ -146,7 +148,7 @@ function capturarInfosComeco(){
     tituloValue="Quais sao as capitais da america do sul?"
     //tituloValue = document.getElementById("titulo").value;
     quizzObjeto.title=tituloValue;
-    urlValue="https://github.com/";
+    urlValue="https://www.infoescola.com/wp-content/uploads/2007/07/america-do-sul.jpg";
     //urlValue = document.getElementById("url").value;
     quizzObjeto.image=urlValue;
     qtdeValue=3;
@@ -394,6 +396,7 @@ function checkInfosNiveis(){
 
 function enviarObjeto(quizzObjeto){
 
-    const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizzObjeto);
+    paginaPronto();
+    //const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizzObjeto);
     promise.then(paginaPronto)
 }

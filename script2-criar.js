@@ -13,11 +13,30 @@ let contadorPerguntas=0;
 let gabarito=undefined;
 let respostas=[];
 let questoes=[];
+let niveis=[];
+
+let txtNivelValue=undefined;
+let tituloNivel=undefined;
+let urlImagemNivel=undefined;
+let urlImagemNivelValue=undefined;
+let descricaoNivel=undefined;
+let descricaoNivelValue=undefined;
+let acertoPorcentagem=undefined;
+let acertoPorcentagemNivelValue=undefined;
+let checkAcertoMin=0;
 
 let quizzObjeto={
     title:"",
     image:"",
-    questions:[]
+    questions:[],
+    levels:[]
+}
+
+let levels={
+    title:"",
+    image:"",
+    text:"",
+    minValue:""
 }
 
 let questions=[{
@@ -92,19 +111,23 @@ function paginaPerguntas(){
 }
 
 function paginaNiveis(){
-    let pag3 = document.querySelector('.paginaQuizz');
-    pag3.innerHTML += `
-                    <div class="enunciado"><h2>Agora,decida os níveis!</h2></div>
+    pag1.innerHTML = "";
+    
+    pag1.innerHTML+=`<div class="enunciado"><h2>Agora,decida os níveis!</h2></div>`
+    for(let i=1; i<=nivelValue;i++){
+    pag1.innerHTML += `
                     <div class="caixaPerguntas">
-                        <h2>Nível 1</h2>
-                        <input id="campo1" placeholder="Título do nível">
-                        <input id="campo1" placeholder="% de acerto mínima">
-                        <input id="campo1" placeholder="URL da imagem do nível">
-                        <input id="campo5" placeholder="Descrição do nível">
+                        <h2>Nível ${i}</h2>
+                        <input id="tituloNivel${i}" class="formatação" placeholder="Título do nível">
+                        <input id="acertoPorcentagem${i}" class="formatação" placeholder="% de acerto mínima">
+                        <input id="urlImagemNivel${i}" class="formatação" placeholder="URL da imagem do nível">
+                        <input id="descricaoNivel${i}"class="descricaoNivelFormatacao"  placeholder="Descrição do nível">
                     </div>
-                    <div class="rodape">
-                        <button onclick="validarDados(this)"><h1>Finalizar quiz</h1></button>
-                    </div>`
+                    `
+    }
+    pag1.innerHTML+=` <div class="rodape">
+    <button onclick="CapturarInfosNiveis(this)"><h1>Finalizar quiz</h1></button>
+    </div>`
 }
 
 function paginaPronto(){
@@ -126,7 +149,7 @@ function capturarInfosComeco(){
     urlValue="https://github.com/";
     //urlValue = document.getElementById("url").value;
     quizzObjeto.image=urlValue;
-    qtdeValue=5;
+    qtdeValue=3;
     //qtdeValue = document.getElementById("qtde").value;
     nivelValue=3;
     //nivelValue = document.getElementById("nivel").value;
@@ -154,8 +177,6 @@ function validarInfosComeco(){
         paginaComeco();
     }
     else{
-        console.log(quizzObjeto.title);
-        console.log(quizzObjeto.image);
     paginaPerguntas();
     }
 }
@@ -168,23 +189,21 @@ function validarURL(urlValue){
     return (false);
 }
 
-
 function CapturarInfosPerguntas(){
-
-    for(i=1;i<=contadorPerguntas;i++){
+ 
+    for(let i=1;i<=contadorPerguntas;i++){
         let contRespostas=0;
-
-        corValue="#BABABA";
-        txtValue= document.getElementById(`txtPergunta${i}`).value;
+        txtValue="Qual a capital do Brasil?"
+        corValue="#bababa";
+         //txtValue= document.getElementById(`txtPergunta${i}`).value;
         //corValue= document.getElementById(`corPergunta${i}`).value;
         if(validarTextoCorPergunta(txtValue,corValue)=== false){
-            console.log(i);
             i=contadorPerguntas;
-            paginaPerguntas()
+             paginaPerguntas();
         } 
         
-        corretaValue="Brasilia"
-        corretaUrlValue="https://github.com/"
+        corretaValue="Brasilia";
+        corretaUrlValue="https://on.fiap.com.br/local/nanocourses/index.php";
         //corretaValue = document.getElementById(`respostaPergunta${i}`).value;
         //corretaUrlValue= document.getElementById(`urlPergunta${i}`).value;
         gabarito=true;
@@ -227,13 +246,51 @@ function CapturarInfosPerguntas(){
         questoes.push(perguntaObjeto);
 
 }
-let quizzObjeto={
-    title:tituloValue,
-    image:urlValue,
-    questions:questoes
+
+paginaNiveis();
 }
 
-console.log(quizzObjeto) 
+function CapturarInfosNiveis(){
+
+    for(let i=1;i<=nivelValue;i++){
+        console.log(i);
+       
+        txtNivelValue="Nivel dificil"
+        //txtNivelValue=document.getElementById(`tituloNivel${i}`).value;
+        acertoPorcentagemNivelValue=70;
+       // acertoPorcentagemNivelValue=document.getElementById(`acertoPorcentagem${i}`).value;
+       urlImagemNivelValue="https://www.w3schools.com/";
+        //urlImagemNivelValue=document.getElementById(`urlImagemNivel${i}`).value;
+        descricaoNivelValue="pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp";
+        //descricaoNivelValue=document.getElementById(`descricaoNivel${i}`).value;
+
+       if(acertoPorcentagemNivelValue>0)
+            checkAcertoMin++;
+
+       if(checkInfosNiveis()=== false){
+        return paginaNiveis();
+       }
+
+       else{
+                let niveisObjeto={
+                    title:txtNivelValue,
+                    image:urlImagemNivelValue,
+                    text:descricaoNivelValue,
+                    minValue:acertoPorcentagemNivelValue
+                }
+                niveis.push(niveisObjeto);
+        }
+    }
+
+   let quizzObjeto={
+    title:tituloValue,
+    image:urlValue,
+    questions:questoes,
+    levels: niveis
+    }
+
+console.log(quizzObjeto);
+enviarObjeto(quizzObjeto);
 }
 
 function incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito){
@@ -268,7 +325,7 @@ function validarNumeroRespostas(contRespostas){
 }
 
 function validarTextoCorPergunta(txtValue,corValue){
-
+console.log(txtValue);
     if(txtValue.length<20){
         alert("Texto da pergunta deve ter no mínimo 20 caracteres");
         return false;
@@ -303,4 +360,40 @@ function checkIncorreta(){
             return false;
     }
     return true;
+}
+
+
+function checkInfosNiveis(){
+
+    if(txtNivelValue.length<10){
+        alert("Título do nível: mínimo de 10 caracteres");
+        return false;
     }
+
+    else if(acertoPorcentagemNivelValue<0|| acertoPorcentagemNivelValue>100){
+        alert("% de acerto mínima: um número entre 0 e 100");
+        return false;
+    }
+
+    else if(validarURL(urlImagemNivelValue)=== false){
+        alert("URL da imagem do nível: deve ter formato de URL");
+        return false;
+    }
+
+    else if(descricaoNivelValue.length<30){
+        alert("Descrição do nível: mínimo de 30 caracteres");
+        return false;
+    }
+
+    else if(checkAcertoMin===0){
+        alert("É obrigatório existir pelo menos 1 nível cuja % de acerto mínima seja 0%");
+        return false;
+    }
+    else return true;
+}
+
+function enviarObjeto(quizzObjeto){
+
+    const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizzObjeto);
+    promise.then(paginaPronto)
+}

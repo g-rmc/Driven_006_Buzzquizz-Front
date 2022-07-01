@@ -81,7 +81,6 @@ body{
 
 .paginaQuizz input{
     width: 90%;
-    height: 46px;
 }
 
 .formatação{
@@ -92,15 +91,18 @@ body{
     color: #BABABA;
     margin: 0 auto;
     margin-bottom: 10px;
+    height: 46px;
 }
 
-#campo5{
+.descricaoNivelFormatacao{
     height:180px;
-    display:flex;
-}
-
-#campo2{
-    margin-bottom: 35px;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 22px;
+    color: #BABABA;
+    margin: 0 auto;
+    margin-bottom: 10px;
 }
 
 .rodape{

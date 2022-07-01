@@ -3,6 +3,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    word-break: break-all;
 }
 
 [onClick] {
@@ -256,7 +257,7 @@ body{
     line-height: 45px;
 }
 
-.pergunta {
+.pergunta, .resultado{
     margin: 40px auto;
     width: 760px;
     padding: 30px;
@@ -268,7 +269,7 @@ body{
     justify-content: space-between;
 }
 
-.titulo-pergunta {
+.titulo-pergunta, .titulo-resultado {
     width: 100%;
     height: 135px;
     display: flex;
@@ -310,6 +311,29 @@ body{
 .resposta-pergunta div {
     transition: opacity 300ms;
 }
+
+.resultado span {
+    margin-top: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.resultado h2 {
+    margin: 0 0 0 20px;
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 25px;
+    color: #484848;
+}
+
+.imagem-resultado {
+    width: 365px;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+/* FINAL DO CSS PARA SOBREPOSIÇÃO */
 
 .filtroBranco {
     opacity: 30%;

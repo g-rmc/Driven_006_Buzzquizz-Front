@@ -188,10 +188,10 @@ function proximaPergunta(divAtual){
     let pergunta = divAtual.parentElement.parentElement
 
     if(pergunta.nextElementSibling !== null){
-        pergunta.nextElementSibling.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        pergunta.nextElementSibling.scrollIntoView({ behavior: 'smooth'})
     } else {
         calcularResultado();
-        //pergunta.nextElementSibling.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        document.querySelector(".resultado").scrollIntoView({ behavior: 'smooth'});
     }
 }
 
@@ -216,6 +216,16 @@ function calcularResultado() {
 
 function renderizarResultado(obj){
     console.log(obj);
+
+    let divResultado = `    <div class="resultado">
+                                <div class="titulo-resultado" style="background-color: #EC362D;">${obj.title}</div>
+                                <span>
+                                    <img src="${obj.image}" class="imagem-resultado">
+                                    <h2>${obj.text}</h2>
+                                </span>
+                            </div>`;
+
+    paginaBase.innerHTML += divResultado;
 }
 
 function organizarLevel(a, b) {

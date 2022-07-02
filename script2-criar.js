@@ -25,31 +25,10 @@ let acertoPorcentagem=undefined;
 let acertoPorcentagemNivelValue=undefined;
 let checkAcertoMin=0;
 
-let quizzObjeto={
-    title:"",
-    image:"",
-    questions:[],
-    levels:[]
-}
-
-let levels={
-    title:"",
-    image:"",
-    text:"",
-    minValue:""
-}
-
-let questions=[{
-            title:"",
-            color:"",
-            answers:[]
-        }]
-
-let answers=[{
-        text:"",
-        image:"",
-        isCorrectAnswer:""
-    }]
+let quizzObjeto={title:"",image:"", questions:[], levels:[]}
+let levels={title:"", image:"", text:"",  minValue:""}
+let questions=[{ title:"", color:"", answers:[]}]
+let answers=[{text:"", image:"", isCorrectAnswer:""}]
 
 function paginaComeco(){
     pag.innerHTML = "";

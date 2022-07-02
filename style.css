@@ -3,6 +3,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    word-break: break-word;
 }
 
 [onClick] {
@@ -43,7 +44,7 @@ body{
 }
 
 .paginaQuizz{
-    margin-top: 69px;
+    margin: 70px auto;
     height: 100%;
 }
 
@@ -234,7 +235,8 @@ body{
     margin-top: 12px;
     margin-left: 10px;
     border-radius: 5px;
-    background-size: cover;    
+    background-size: cover;
+
 }
 
 .quizz div{
@@ -325,15 +327,15 @@ body{
     width: 330px;
     height: 175px;
     object-fit: cover;
+    margin-top: 10px;
 }
 
 .resposta-pergunta h2 {
     font-weight: 700;
     font-size: 16px;
     line-height: 22px;
-    margin-top: 5px;
+    margin: 5px 0;
     max-width: 330px;
-    height: 44px;
 }
 
 .resposta-pergunta div {
@@ -410,11 +412,26 @@ body{
 @media(max-width:1100px){
 
     body{
-        width: 375px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
     }
 
-    .caixaPerguntas, .meusQuizzes, .todosQuizzes {
-        width: 340px;
+    .banner {
+        height: 140px;
+    }
+
+    .caixaPerguntas, .meusQuizzes, .todosQuizzes, .pergunta, .resultado, .quizz {
+        width: 100%;
+    }
+
+    .quizzes {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .quizz {
+        margin-right: 10px;
     }
 
     .meusQuizzes{
@@ -422,7 +439,53 @@ body{
     }
 
     .todosQuizzes{
-        margin-top: 30px;
+        margin-top: 20px;
+    }
+
+    .todosQuizzes ion-icon {
+        margin-right: 10px;
+    }
+
+    .todosQuizzes span {
+        justify-content: space-between;
+    }
+
+    .banner h1, .titulo-pergunta {
+        font-size: 19px;
+    }
+
+    .pergunta, .resultado {
+        margin: 20px 0;
+        padding: 15px;
+    }
+
+    .pergunta img {
+        width: 100%;
+    }
+
+    .pergunta h2 {
+        font-size: 13px;
+    }
+
+    .resposta-true, .resposta-false, .cor-false, .cor-true {
+        width: 48%;
+    }
+
+    .imagem-resultado {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .resultado h2{
+        margin: 0;
+    }
+
+    .resultado span {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
 }

@@ -14,6 +14,7 @@ let gabarito=undefined;
 let respostas=[];
 let questoes=[];
 let niveis=[];
+let idQuizzUsuario=[];
 
 let txtNivelValue=undefined;
 let tituloNivel=undefined;
@@ -190,14 +191,14 @@ function CapturarInfosPerguntas(){
         } 
         
         corretaValue="Brasilia";
-        corretaUrlValue="https://on.fiap.com.br/local/nanocourses/index.php";
+        corretaUrlValue="https://www.vinhedo.sp.gov.br/fotos/baca8cdabf5bd1e8b4df102ae7873545.jpg";
         //corretaValue = document.getElementById(`respostaPergunta${i}`).value;
         //corretaUrlValue= document.getElementById(`urlPergunta${i}`).value;
         gabarito=true;
         checkCorreta();
                 
         incorretaValue="maringa"
-        incorretaUrlValue="https://github.com/"
+        incorretaUrlValue="https://www.vinhedo.sp.gov.br/fotos/baca8cdabf5bd1e8b4df102ae7873545.jpg"
         //incorretaValue = document.getElementById(`respostaPergunta1${i}`).value; 
         //incorretaUrlValue= document.getElementById(`urlPergunta1${i}`).value;
         gabarito="false";
@@ -205,7 +206,7 @@ function CapturarInfosPerguntas(){
            contRespostas++;
 
         incorretaValue="sao paulo"
-        incorretaUrlValue="https://github.com/"
+        incorretaUrlValue="https://www.vinhedo.sp.gov.br/fotos/baca8cdabf5bd1e8b4df102ae7873545.jpg"
         //incorretaValue = document.getElementById(`respostaPergunta2${i}`).value;
         //incorretaUrlValue= document.getElementById(`urlPergunta2${i}`).value;
         gabarito="false";
@@ -213,7 +214,7 @@ function CapturarInfosPerguntas(){
         contRespostas++;
 
         incorretaValue="ponta grossa"
-        incorretaUrlValue="https://github.com/"
+        incorretaUrlValue="https://www.vinhedo.sp.gov.br/fotos/baca8cdabf5bd1e8b4df102ae7873545.jpg"
         //incorretaValue = document.getElementById(`respostaPergunta3${i}`).value;  
         //incorretaUrlValue= document.getElementById(`urlPergunta3${i}`).value;
         gabarito="false"; 
@@ -240,13 +241,13 @@ paginaNiveis();
 function CapturarInfosNiveis(){
 
     for(let i=1;i<=nivelValue;i++){
-        console.log(i);
-       
+
+        
         txtNivelValue="Nivel dificil"
         //txtNivelValue=document.getElementById(`tituloNivel${i}`).value;
         acertoPorcentagemNivelValue=70;
        // acertoPorcentagemNivelValue=document.getElementById(`acertoPorcentagem${i}`).value;
-       urlImagemNivelValue="https://www.w3schools.com/";
+       urlImagemNivelValue="https://www.vinhedo.sp.gov.br/fotos/baca8cdabf5bd1e8b4df102ae7873545.jpg";
         //urlImagemNivelValue=document.getElementById(`urlImagemNivel${i}`).value;
         descricaoNivelValue="pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp";
         //descricaoNivelValue=document.getElementById(`descricaoNivel${i}`).value;
@@ -276,8 +277,8 @@ function CapturarInfosNiveis(){
     levels: niveis
     }
 
-console.log(quizzObjeto);
-enviarObjeto(quizzObjeto);
+
+    enviarObjeto(quizzObjeto);
 }
 
 function incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito){
@@ -312,7 +313,7 @@ function validarNumeroRespostas(contRespostas){
 }
 
 function validarTextoCorPergunta(txtValue,corValue){
-console.log(txtValue);
+
     if(txtValue.length<20){
         alert("Texto da pergunta deve ter no mínimo 20 caracteres");
         return false;
@@ -382,12 +383,35 @@ function checkInfosNiveis(){
 function enviarObjeto(quizzObjeto){
 
     paginaPronto();
-    //const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizzObjeto);
-    promise.then(paginaPronto)
+    const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizzObjeto);
+    promise.then(paginaPronto);
+    promise.then(armazenarCodigoQuizz);
 }
 
 function removerBloco(pergunta){
     const remover = document.querySelector(`.pergunta${pergunta}`);
     console.log(remover);
     remover.classList.toggle("escondido");
+}
+
+
+//INICIO PROGRAMAÇÃO DE ARMAZENAGEM DO QUIZZ
+
+function armazenarCodigoQuizz (obj) {
+
+    if (localStorage.getItem('idQuizzes') !== null) {
+        idQuizzUsuario = JSON.parse(localStorage.getItem('idQuizzes'));
+    }
+
+    let objId = {
+                id: obj.data.id,
+                key: obj.data.key
+                }
+    
+    idQuizzUsuario.push(objId);
+
+    console.log(idQuizzUsuario);
+
+    localStorage.setItem('idQuizzes', JSON.stringify(idQuizzUsuario));
+
 }

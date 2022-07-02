@@ -53,7 +53,7 @@ function renderizarQuizzes(obj){
 
                 divPaiMeusQuizzes.innerHTML = ` <div class="todosQuizzes">
                                                     <span>
-                                                        <h1>Meus Quizzes</h1>
+                                                        <h1>Seus Quizzes</h1>
                                                         <ion-icon name="add-circle"
                                                         onclick="paginaComeco()"
                                                         class="botaoAdicionar"></ion-icon>
@@ -87,13 +87,18 @@ function renderizarQuizzes(obj){
 }
 
 function validarIdUsuario(id){
-    //Verificar quais são os IDs dos quizzes criados pelo usuário
+    
+    let idQuizzUsuario = JSON.parse(localStorage.getItem('idQuizzes'));
 
-    if (id === 6 || id === 1){
-        return true;
-    } else {
-        return false;
+    let boolean = false;
+
+    for (let i = 0; i < idQuizzUsuario.length; i++){
+        if (id === idQuizzUsuario[i].id){
+            boolean = true;
+        }
     }
+
+    return boolean;
 }
 
 function alertaErro(obj){

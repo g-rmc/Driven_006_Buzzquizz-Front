@@ -127,7 +127,7 @@ function paginaPronto(){
                     <p>${tituloValue}</p>
                     </div>
                     <div class="rodape">
-                        <button onclick="carregarQuizz()"><h1>Acessar quizz</h1></button>
+                        <button onclick="carregarQuizz(obj.data.id)"><h1>Acessar quizz</h1></button>
                     <div><h1 onclick="atualizarPagina()">Voltar para home</h1></div>
                     </div>`
 }
@@ -204,21 +204,24 @@ function CapturarInfosPerguntas(){
         //incorretaValue = document.getElementById(`respostaPergunta1${i}`).value; 
         //incorretaUrlValue= document.getElementById(`urlPergunta1${i}`).value;
         gabarito=false;
-        checkIncorreta(incorretaValue,incorretaUrlValue,gabarito)
+        if(checkIncorreta(incorretaValue,incorretaUrlValue,gabarito)===false)
+        return paginaPerguntas();
 
         incorretaValue="sao paulo"
         incorretaUrlValue="https://www.vinhedo.sp.gov.br/fotos/baca8cdabf5bd1e8b4df102ae7873545.jpg"
         //incorretaValue = document.getElementById(`respostaPergunta2${i}`).value;
         //incorretaUrlValue= document.getElementById(`urlPergunta2${i}`).value;
         gabarito=false;
-        checkIncorreta(incorretaValue,incorretaUrlValue,gabarito)
+        if(checkIncorreta(incorretaValue,incorretaUrlValue,gabarito)===false)
+        return paginaPerguntas();
 
         incorretaValue="ponta grossa"
-        incorretaUrlValue="https://www.vinhedo.sp.gov.br/fotos/baca8cdabf5bd1e8b4df102ae7873545.jpg"
+        incorretaUrlValue="http://www.vinhedo.sp.gov.br/fotos/baca8cdabf5bd1e8b4df102ae7873545.jpg"
         //incorretaValue = document.getElementById(`respostaPergunta3${i}`).value;  
         //incorretaUrlValue= document.getElementById(`urlPergunta3${i}`).value;
-        gabarito=false; 
-        checkIncorreta(incorretaValue,incorretaUrlValue,gabarito)
+        gabarito=false;
+        if(checkIncorreta(incorretaValue,incorretaUrlValue,gabarito)===false)
+        return paginaPerguntas();
 
        if(validarNumeroRespostas(contRespostas)=== false){
         i=contadorPerguntas; paginaPerguntas();
@@ -320,18 +323,18 @@ function checkCorreta(){
             text:corretaValue, image:corretaUrlValue, isCorrectAnswer:gabarito
         }
         respostas.push(objetoCorreto)
-        corretaValue=""; corretaUrlValue="";
+        corretaValue=""; corretaUrlValue="";gabarito="";
 }
 
 function checkIncorreta(incorretaValue,incorretaUrlValue,gabarito){
  
-    console.log("antes validar URL")
+
     if(validarURL(incorretaUrlValue)===false){        
         alert("Insira uma URL valida");
         return false;
 }
-console.log("depois validar URL")
-    if(incorretaValue!=="" && incorretaUrlValue!==""){
+
+    if(incorretaValue!=="" && incorretaUrlValue!=="" && gabarito!==""){
         let objetoIncorreto={text:incorretaValue,image:incorretaUrlValue, isCorrectAnswer:gabarito
         }
         respostas.push(objetoIncorreto)
@@ -342,7 +345,7 @@ console.log("depois validar URL")
         }
 
     contRespostas++;
-    incorretaValue=""; incorretaUrlValue="";
+    incorretaValue=""; incorretaUrlValue=""; gabarito="";
     return true;
 }
 
@@ -379,9 +382,9 @@ function checkInfosNiveis(){
 function enviarObjeto(quizzObjeto){
 
     paginaPronto();
-   // const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizzObjeto);
-    //promise.then(paginaPronto);
-    //promise.then(armazenarCodigoQuizz);
+   //const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizzObjeto);
+   //promise.then(paginaPronto);
+   //promise.then(armazenarCodigoQuizz);
 }
 
 function removerBloco(pergunta){

@@ -133,22 +133,24 @@ function paginaPronto(){
 }
 
 function capturarInfosComeco(){
-    tituloValue="Testando não ta funcionando 100%"
-    //tituloValue = document.getElementById("titulo").value;
+
+    tituloValue = document.getElementById("titulo").value;
     quizzObjeto.title=tituloValue;
-    urlValue="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/South_America_%28orthographic_projection%29.svg/250px-South_America_%28orthographic_projection%29.svg.png";
-    //urlValue = document.getElementById("url").value;
+    urlValue = document.getElementById("url").value;
     quizzObjeto.image=urlValue;
-    qtdeValue=3;
-    //qtdeValue = document.getElementById("qtde").value;
-    nivelValue=3;
-    //nivelValue = document.getElementById("nivel").value;
+    qtdeValue = document.getElementById("qtde").value;
+    nivelValue = document.getElementById("nivel").value;
     validarInfosComeco();
 }
 
 function validarInfosComeco(){
     if(tituloValue.length<20 || tituloValue>65){
         alert("Titulo deve ter entre 20 e 65 caracteres");
+        paginaComeco();
+    }
+
+    else if(validarURL(urlValue)===false){
+        alert("Insira uma URL valida");
         paginaComeco();
     }
 
@@ -162,10 +164,6 @@ function validarInfosComeco(){
         paginaComeco();
     }
 
-    else if(validarURL(urlValue)===false){
-        alert("Insira uma URL valida");
-        paginaComeco();
-    }
     else{
     paginaPerguntas();
     }

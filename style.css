@@ -70,7 +70,7 @@ body{
 }
 
 .caixaPerguntas{
-    width:70%;
+    width:600px;
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     display: flex;
@@ -80,27 +80,33 @@ body{
     margin: 20px auto;
 }
 
-.caixaImagem{
-    display: flex;
-    margin: 0 auto;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%), url(image.png);
+.caixaPerguntas input {
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
     border-radius: 5px;
-    height: 266px;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    background-size: 300px 300px;
-    justify-content: center;
+}
+
+.caixaImagem{
+    margin: 0 auto;
+    color: #FFFFFF;
+    width: 500px;
+    height: 250px;
+    border-radius: 5px;
 }
 
 .caixaImagem p{
+    width: inherit;
+    height: inherit;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%);
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
     line-height: 27px;
-    display: flex;
     color: white;
-    margin: 0px 0px 12px 12px;
+    padding: 15px;
+    display: flex;
+    align-items: flex-end;
 }
 
 
@@ -114,6 +120,7 @@ body{
     font-size: 19px;
     line-height: 22px;
     color: #BABABA;
+    padding: 0 10px;
     margin: 0 auto;
     margin-bottom: 10px;
     height: 46px;
@@ -393,6 +400,37 @@ body{
     margin-right: 26px;
     width: 26px;
     height: 26px;
+}
+
+.botoes {
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reiniciarQuizz {
+    width: 260px;
+    height: 52px;
+    background: #EC362D;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFF5F4;
+}
+
+.reiniciarPagina {
+    border: none;
+    background: none;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 25px;
+    color: #818181;
+    margin-top: 30px;
 }
 
 /* FINAL DO CSS PARA SOBREPOSIÇÃO */

@@ -92,11 +92,12 @@ function validarIdUsuario(id){
     let boolean = false;
 
     if(idQuizzUsuario!==null){
-    for (let i = 0; i < idQuizzUsuario.length; i++){
-        if (id === idQuizzUsuario[i].id){
-            boolean = true;
+        for (let i = 0; i < idQuizzUsuario.length; i++){
+            if (id === idQuizzUsuario[i].id){
+                boolean = true;
+            }
         }
-    }}
+    }
 
     return boolean;
 }
@@ -108,6 +109,7 @@ function alertaErro(obj){
 }
 
 function carregarQuizz(id){
+    window.scrollTo({top: 0, behavior: 'smooth'});
     idQuizz = id;
     let promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${id}`);
     promise.then(renderizarQuizz);
@@ -116,7 +118,6 @@ function carregarQuizz(id){
 
 function renderizarQuizz(obj){
 
-    window.scrollTo(0, 0);
     respostasDadas = 0;
     respostasCorretas = 0;
 

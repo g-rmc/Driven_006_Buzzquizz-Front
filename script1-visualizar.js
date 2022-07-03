@@ -216,7 +216,7 @@ function calcularResultado() {
     levels.sort(organizarLevel);
 
     for (let i = 0; i < levels.length; i++) {
-        if (pontuacao > levels[i].minValue){
+        if (pontuacao > Number(levels[i].minValue)){
             idLevelAlcancado = i
         }
     }
@@ -247,6 +247,10 @@ function renderizarResultado(obj){
 }
 
 function organizarLevel(a, b) {
+
+    a = Number(a);
+    b = Number(b);
+
     if (a.minValue < b.minValue){
         return -1;
     } else {

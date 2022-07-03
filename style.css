@@ -373,7 +373,7 @@ body{
 }
 
 .perguntaBloco, .nivelBloco{
-    width: 70%;
+    width: 600px;
     height: 74px;
     display: flex;
     align-items: center;
@@ -462,7 +462,7 @@ body{
         height: 140px;
     }
 
-    .caixaPerguntas, .meusQuizzes, .todosQuizzes,.perguntaBloco, .pergunta, .resultado, .quizz {
+    .caixaPerguntas, .meusQuizzes, .todosQuizzes,.perguntaBloco, .pergunta, .resultado, .quizz, .nivelBloco {
         width: 100%;
     }
 

@@ -367,7 +367,7 @@ body{
     display: none;
 }
 
-.perguntaBloco{
+.perguntaBloco, .nivelBloco{
     width: 50%;
     height: 74px;
     display: flex;

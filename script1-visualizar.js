@@ -20,7 +20,6 @@ function carregarPaginaInicial(){
                                         <button onclick="paginaComeco()">Criar Quizz</button>
                                     </div>
                                 </div>
-
                                 <div class="todosQuizzes">
                                     <h1>Todos os Quizzes</h1>
                                     <div class="quizzes"></div>
@@ -92,11 +91,12 @@ function validarIdUsuario(id){
 
     let boolean = false;
 
+    if(idQuizzUsuario!==null){
     for (let i = 0; i < idQuizzUsuario.length; i++){
         if (id === idQuizzUsuario[i].id){
             boolean = true;
         }
-    }
+    }}
 
     return boolean;
 }

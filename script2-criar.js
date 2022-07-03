@@ -10,6 +10,7 @@ let corretaUrlValue=undefined;
 let incorretaValue=undefined;
 let incorretaUrlValue=undefined;
 let contadorPerguntas=0;
+let contRespostas=0;
 let gabarito=undefined;
 let respostas=[];
 let questoes=[];
@@ -27,9 +28,9 @@ let acertoPorcentagemNivelValue=undefined;
 let checkAcertoMin=0;
 
 let quizzObjeto={title:"",image:"", questions:[], levels:[]}
-let levels={title:"", image:"", text:"",  minValue:""}
-let questions=[{ title:"", color:"", answers:[]}]
-let answers=[{text:"", image:"", isCorrectAnswer:""}]
+let levels={title:"", image:"", text:"", minValue:""}
+let questions=[{ title:"", color:"", answers:[] }]
+let answers=[{ text:"", image:"", isCorrectAnswer:""  }]
 
 function paginaComeco(){
     pag.innerHTML = "";
@@ -61,11 +62,9 @@ function paginaPerguntas(){
                 <div class="pergunta${i} escondido">
                 <div class="caixaPerguntas">
                     <div>
-                        <h2>Pergunta ${i}</h2>
                         <input id="txtPergunta${i}" class="formatação" placeholder="Texto da pergunta">
                         <input id="corPergunta${i}" class="formatação" placeholder="Cor de fundo da pergunta">
                     </div>
-
                     <div>
                         <h2>Resposta Correta</h2>
                         <input id="respostaPergunta${i}" class="formatação" placeholder="Resposta correta">
@@ -76,14 +75,11 @@ function paginaPerguntas(){
                         <h2>Respostas Incorretas</h2>
                         <input id="respostaPergunta1${i}" class="formatação" placeholder="Resposta incorreta 1">
                         <input id="urlPergunta1${i}" class="formatação" placeholder="URL da imagem 1">
-
                         <div class="afastamento"></div>
                     
                         <input id="respostaPergunta2${i}" class="formatação" placeholder="Resposta incorreta 2">
                         <input id="urlPergunta2${i}" class="formatação" placeholder="URL da imagem 2">
-
                         <div class="afastamento"></div>
-
                         <input id="respostaPergunta3${i}" class="formatação" placeholder="Resposta incorreta 3">
                         <input id="urlPergunta3${i}" class="formatação" placeholder="URL da imagem 3">
                     </div>
@@ -102,13 +98,19 @@ function paginaNiveis(){
     pag.innerHTML+=`<div class="enunciado"><h2>Agora,decida os níveis!</h2></div>`
     for(let i=1; i<=nivelValue;i++){
     pag.innerHTML += `
+                 <div class="nivelBloco" onclick="removerBlocoNivel(${i})">
+                    <h2> Nível ${i} </h2>
+                    <ion-icon class="icone-exp" name="create-outline"></ion-icon>
+                 </div>
+                    <div class="nivel${i} escondido">
                     <div class="caixaPerguntas">
-                        <h2>Nível ${i}</h2>
                         <input id="tituloNivel${i}" class="formatação" placeholder="Título do nível">
                         <input id="acertoPorcentagem${i}" class="formatação" placeholder="% de acerto mínima">
                         <input id="urlImagemNivel${i}" class="formatação" placeholder="URL da imagem do nível">
                         <input id="descricaoNivel${i}"class="descricaoNivelFormatacao"  placeholder="Descrição do nível">
                     </div>
+                    </div>
+                
                     `
     }
     pag.innerHTML+=` <div class="rodape">
@@ -125,13 +127,13 @@ function paginaPronto(){
                     <p>${tituloValue}</p>
                     </div>
                     <div class="rodape">
-                        <button onclick="validarDados(this)"><h1>Acessar quizz</h1></button>
-                    <div><h1>Voltar para home</h1></div>
+                        <button onclick="carregarQuizz()"><h1>Acessar quizz</h1></button>
+                    <div><h1 onclick="atualizarPagina()">Voltar para home</h1></div>
                     </div>`
 }
 
 function capturarInfosComeco(){
-    tituloValue="Quais sao as capitais da América do Sul?"
+    tituloValue="Testando não ta funcionando 100%"
     //tituloValue = document.getElementById("titulo").value;
     quizzObjeto.title=tituloValue;
     urlValue="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/South_America_%28orthographic_projection%29.svg/250px-South_America_%28orthographic_projection%29.svg.png";
@@ -170,7 +172,7 @@ function validarInfosComeco(){
 }
 
 function validarURL(urlValue){
-    let urlregex = new RegExp("^(http|https|ftp)\://([a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
+    let urlregex = /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
     if (urlregex.test(urlValue)) {
         return (true);
     }
@@ -180,7 +182,7 @@ function validarURL(urlValue){
 function CapturarInfosPerguntas(){
  
     for(let i=1;i<=contadorPerguntas;i++){
-        let contRespostas=0;
+        contRespostas=0;
         txtValue="Qual a capital do Brasil?"
         corValue="#bababa";
          //txtValue= document.getElementById(`txtPergunta${i}`).value;
@@ -201,40 +203,33 @@ function CapturarInfosPerguntas(){
         incorretaUrlValue="https://www.vinhedo.sp.gov.br/fotos/baca8cdabf5bd1e8b4df102ae7873545.jpg"
         //incorretaValue = document.getElementById(`respostaPergunta1${i}`).value; 
         //incorretaUrlValue= document.getElementById(`urlPergunta1${i}`).value;
-        gabarito="false";
-        if(checkIncorreta()===true)
-           contRespostas++;
+        gabarito=false;
+        checkIncorreta(incorretaValue,incorretaUrlValue,gabarito)
 
         incorretaValue="sao paulo"
         incorretaUrlValue="https://www.vinhedo.sp.gov.br/fotos/baca8cdabf5bd1e8b4df102ae7873545.jpg"
         //incorretaValue = document.getElementById(`respostaPergunta2${i}`).value;
         //incorretaUrlValue= document.getElementById(`urlPergunta2${i}`).value;
-        gabarito="false";
-        if(checkIncorreta()===true)
-        contRespostas++;
+        gabarito=false;
+        checkIncorreta(incorretaValue,incorretaUrlValue,gabarito)
 
         incorretaValue="ponta grossa"
         incorretaUrlValue="https://www.vinhedo.sp.gov.br/fotos/baca8cdabf5bd1e8b4df102ae7873545.jpg"
         //incorretaValue = document.getElementById(`respostaPergunta3${i}`).value;  
         //incorretaUrlValue= document.getElementById(`urlPergunta3${i}`).value;
-        gabarito="false"; 
-         if(checkIncorreta()===true)
-           contRespostas++;
+        gabarito=false; 
+        checkIncorreta(incorretaValue,incorretaUrlValue,gabarito)
 
        if(validarNumeroRespostas(contRespostas)=== false){
         i=contadorPerguntas; paginaPerguntas();
        }
 
-        let perguntaObjeto={
-            title:txtValue,
-            color:corValue,
-            answers:respostas
-        }
+        let perguntaObjeto={ title:txtValue, color:corValue, answers:respostas  }
         respostas=[];
         questoes.push(perguntaObjeto);
 
 }
-
+console.log(corValue);
 paginaNiveis();
 }
 
@@ -260,9 +255,7 @@ function CapturarInfosNiveis(){
        }
 
        else{
-                let niveisObjeto={
-                    title:txtNivelValue,
-                    image:urlImagemNivelValue,
+                let niveisObjeto={title:txtNivelValue, image:urlImagemNivelValue,
                     text:descricaoNivelValue,
                     minValue:acertoPorcentagemNivelValue
                 }
@@ -270,39 +263,29 @@ function CapturarInfosNiveis(){
         }
     }
 
-   let quizzObjeto={
-    title:tituloValue,
-    image:urlValue,
-    questions:questoes,
-    levels: niveis
+   let quizzObjeto={ title:tituloValue, image:urlValue, questions:questoes,levels: niveis    }
+    console.log(quizzObjeto);
+    enviarObjeto(quizzObjeto);
     }
 
+/*function incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito){
 
-    enviarObjeto(quizzObjeto);
-}
-
-function incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito){
-
-    let objetoIncorreto={
-            text:incorretaValue,
-            image:incorretaUrlValue,
-            isCorrectAnswer:gabarito
+    let objetoIncorreto={text:incorretaValue,image:incorretaUrlValue, isCorrectAnswer:gabarito
     }
     respostas.push(objetoIncorreto)
     incorretaValue="";
     incorretaUrlValue="";
-}
+}*/
 
-function objetoCorreto(corretaValue,corretaUrlValue,gabarito){
+/*function objetoCorreto(corretaValue,corretaUrlValue,gabarito){
+    console.log("3");
     let objetoCorreto={
-        text:corretaValue,
-        image:corretaUrlValue,
-        isCorrectAnswer:gabarito
+        text:corretaValue, image:corretaUrlValue, isCorrectAnswer:gabarito
     }
     respostas.push(objetoCorreto)
-    corretaValue="";
-    corretaUrlValue="";
-}
+    corretaValue=""; corretaUrlValue="";
+    console.log("4");
+}*/
 
 function validarNumeroRespostas(contRespostas){
     if(contRespostas<2){
@@ -313,7 +296,7 @@ function validarNumeroRespostas(contRespostas){
 }
 
 function validarTextoCorPergunta(txtValue,corValue){
-
+    console.log("1");
     if(txtValue.length<20){
         alert("Texto da pergunta deve ter no mínimo 20 caracteres");
         return false;
@@ -327,26 +310,39 @@ function validarTextoCorPergunta(txtValue,corValue){
 }
 
 function checkCorreta(){
-objetoCorreto(corretaValue,corretaUrlValue,gabarito);
+    console.log("2");
         if(validarURL(corretaUrlValue)===false){
             alert("Insira uma URL valida");
+            return false;
         }
+
+        let objetoCorreto={
+            text:corretaValue, image:corretaUrlValue, isCorrectAnswer:gabarito
+        }
+        respostas.push(objetoCorreto)
+        corretaValue=""; corretaUrlValue="";
 }
 
-function checkIncorreta(){
+function checkIncorreta(incorretaValue,incorretaUrlValue,gabarito){
  
+    console.log("antes validar URL")
+    if(validarURL(incorretaUrlValue)===false){        
+        alert("Insira uma URL valida");
+        return false;
+}
+console.log("depois validar URL")
     if(incorretaValue!=="" && incorretaUrlValue!==""){
-        incorretaObjeto(incorretaValue,incorretaUrlValue,gabarito);
+        let objetoIncorreto={text:incorretaValue,image:incorretaUrlValue, isCorrectAnswer:gabarito
+        }
+        respostas.push(objetoIncorreto)
     }
         else{
             alert("Não pode ter resposta vazia");
             return false;
         }
 
-    if(validarURL(incorretaUrlValue)===false){        
-            alert("Insira uma URL valida");
-            return false;
-    }
+    contRespostas++;
+    incorretaValue=""; incorretaUrlValue="";
     return true;
 }
 
@@ -383,9 +379,9 @@ function checkInfosNiveis(){
 function enviarObjeto(quizzObjeto){
 
     paginaPronto();
-    const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizzObjeto);
-    promise.then(paginaPronto);
-    promise.then(armazenarCodigoQuizz);
+   // const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizzObjeto);
+    //promise.then(paginaPronto);
+    //promise.then(armazenarCodigoQuizz);
 }
 
 function removerBloco(pergunta){
@@ -394,6 +390,11 @@ function removerBloco(pergunta){
     remover.classList.toggle("escondido");
 }
 
+function removerBlocoNivel(nivel){
+    const remover = document.querySelector(`.nivel${nivel}`);
+    console.log(remover);
+    remover.classList.toggle("escondido");
+}
 
 //INICIO PROGRAMAÇÃO DE ARMAZENAGEM DO QUIZZ
 
@@ -413,5 +414,4 @@ function armazenarCodigoQuizz (obj) {
     console.log(idQuizzUsuario);
 
     localStorage.setItem('idQuizzes', JSON.stringify(idQuizzUsuario));
-
 }

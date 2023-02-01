@@ -29,7 +29,7 @@ function carregarPaginaInicial(){
 }
 
 function carregarQuizzes(){
-    let promise = axios.get('https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes');
+    let promise = axios.get('https://mock-api.driven.com.br/api/vs/buzzquizz/quizzes');
     promise.then(renderizarQuizzes);
     promise.catch(alertaErro);
 }
@@ -111,7 +111,7 @@ function alertaErro(obj){
 function carregarQuizz(id){
     window.scrollTo({top: 0, behavior: 'smooth'});
     idQuizz = id;
-    let promise = axios.get(`https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes/${id}`);
+    let promise = axios.get(`https://mock-api.driven.com.br/api/vs/buzzquizz/quizzes/${id}`);
     promise.then(renderizarQuizz);
     promise.catch(alertaErro);
 }

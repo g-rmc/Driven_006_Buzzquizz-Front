@@ -395,7 +395,7 @@ function enviarObjeto(quizzObjeto){
 
     console.log(quizzObjeto);
 
-    const promise = axios.post("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes", quizzObjeto);
+    const promise = axios.post("https://mock-api.driven.com.br/api/vs/buzzquizz/quizzes", quizzObjeto);
     promise.then(paginaPronto);
     promise.then(armazenarCodigoQuizz);
 }
